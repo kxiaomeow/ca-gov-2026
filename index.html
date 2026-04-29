@@ -33,22 +33,46 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .tleg { display: flex; align-items: center; gap: 6px; }
 .tleg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
+/* ── POLLING WIDGET ── */
+.poll-widget { max-width: 1700px; margin: 0 auto 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 18px 22px 20px; }
+.poll-widget-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.poll-widget-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 500; color: var(--text-primary); }
+.poll-widget-meta { font-size: 11px; color: var(--text-muted); }
+@keyframes spin { to { transform: rotate(360deg); } }
+.poll-bars { display: flex; flex-direction: column; gap: 8px; }
+.poll-row { display: grid; grid-template-columns: 160px 1fr 40px; align-items: center; gap: 10px; }
+.poll-name { display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.poll-party-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.poll-party-dot.dem { background: var(--dem); }
+.poll-party-dot.rep { background: var(--rep); }
+.poll-bar-track { height: 20px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+.poll-bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s cubic-bezier(.4,0,.2,1); display: flex; align-items: center; padding-left: 8px; min-width: 4px; }
+.poll-bar-fill.dem { background: var(--dem); }
+.poll-bar-fill.rep { background: var(--rep); }
+.poll-bar-label { font-size: 10.5px; font-weight: 500; color: rgba(255,255,255,0.92); white-space: nowrap; overflow: hidden; }
+.poll-pct { font-size: 12.5px; font-weight: 500; color: var(--text-secondary); text-align: right; }
+.poll-source { font-size: 10.5px; color: var(--text-muted); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; align-items: center; }
+.poll-timestamp { font-size: 10.5px; color: var(--text-muted); font-style: italic; }
+
+.updated-bar { max-width:1700px; margin:0 auto 14px; background:#f0f7f0; border:1px solid #b5d9b5; border-radius:7px; padding:11px 16px; display:flex; align-items:center; gap:10px; }
+.updated-bar-icon { font-size:15px; flex-shrink:0; }
+.updated-bar-text { font-size:12.5px; color:#2d6a3f; font-weight:500; }
+.updated-bar-sub { font-size:11px; color:#8c8680; margin-top:1px; }
+
+
+
+/* ── TABLE ── */
 .scroll-wrap { max-width: 1700px; margin: 0 auto; overflow-x: auto; }
-table.grid { width: 100%; border-collapse: collapse; min-width: 1280px; background: var(--surface); border: 1px solid var(--border); }
+table.grid { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); }
 th, td { border: 1px solid var(--border); vertical-align: top; padding: 12px 12px; }
-
 .row-label { font-family: 'Playfair Display', serif; font-size: 11px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.07em; background: var(--surface2); width: 95px; min-width: 95px; vertical-align: middle; text-align: center; line-height: 1.5; }
-
-/* Column headers */
 .col-head { text-align: center; padding: 14px 10px; min-width: 155px; }
 .col-head.dem { background: var(--dem); }
 .col-head.rep { background: var(--rep); }
-
 .party-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 500; padding: 2px 7px; border-radius: 3px; margin-bottom: 5px; letter-spacing: 0.04em; text-transform: uppercase; background: rgba(255,255,255,0.18); color: rgba(255,255,255,0.9); }
 .party-dot { width: 6px; height: 6px; border-radius: 50%; }
 .party-dot.dem { background: #7eb8e8; }
 .party-dot.rep { background: #e87e7e; }
-
 .avatar-wrap { display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.1); }
 .avatar-fallback { width: 56px; height: 56px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.8); font-family: 'Playfair Display', serif; }
@@ -63,17 +87,13 @@ th, td { border: 1px solid var(--border); vertical-align: top; padding: 12px 12p
 .wing-cent  { background: rgba(255,200,100,0.28); color: #ffe0a0; }
 .wing-cons  { background: rgba(255,140,140,0.28); color: #ffc8c8; }
 .wing-trump { background: rgba(255,80,80,0.35); color: #ffdddd; }
-
-/* Body cells */
 td.dem-cell { background: var(--surface); border-top: 2px solid var(--dem-mid); }
 td.rep-cell { background: #fffbfb; border-top: 2px solid var(--rep-mid); }
 tr:nth-child(even) td.dem-cell { background: #f8fafc; }
 tr:nth-child(even) td.rep-cell { background: #fdf8f8; }
 td.dem-cell, td.rep-cell { font-size: 12.5px; }
-
 ul.bl { padding-left: 14px; margin: 0; }
 ul.bl li { margin-bottom: 4px; color: var(--text-secondary); line-height: 1.55; font-size: 12.5px; }
-
 .track-item { display: flex; gap: 7px; align-items: flex-start; margin-bottom: 7px; }
 .track-item:last-child { margin-bottom: 0; }
 .ti-icon { flex-shrink: 0; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; margin-top: 2px; }
@@ -83,7 +103,6 @@ ul.bl li { margin-bottom: 4px; color: var(--text-secondary); line-height: 1.55; 
 .ti-body { display: flex; flex-direction: column; gap: 1px; }
 .ti-text { color: var(--text-secondary); font-size: 12.5px; line-height: 1.5; }
 .ti-link  { font-size: 10px; font-style: italic; color: var(--text-muted); }
-
 .donor-total { font-size: 12.5px; font-weight: 500; color: var(--text-primary); margin-bottom: 3px; }
 .donor-note-sm { font-size: 11px; color: var(--text-muted); margin-bottom: 7px; }
 .chips { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 5px; }
@@ -91,11 +110,9 @@ ul.bl li { margin-bottom: 4px; color: var(--text-secondary); line-height: 1.55; 
 .chip-warn { background: var(--red-light); border-color: #f0b8b8; color: var(--red-bad); }
 .warn-note { font-size: 10.5px; color: var(--red-bad); margin-top: 4px; line-height: 1.4; }
 .ok-note   { font-size: 10.5px; color: var(--green); margin-top: 4px; line-height: 1.4; }
-
 .end-item { font-size: 12px; color: var(--text-secondary); padding: 3px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
 .end-item:last-child { border-bottom: none; }
 .end-item.opp { color: var(--red-bad); }
-
 .voice-label { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
 .voice-label.sup { color: var(--green); }
 .voice-label.det { color: var(--red-bad); }
@@ -106,83 +123,7 @@ ul.bl li { margin-bottom: 4px; color: var(--text-secondary); line-height: 1.55; 
 .voice-block ul { padding-left: 13px; margin: 0; }
 .voice-block ul li { font-size: 12px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 3px; }
 .voice-block ul li:last-child { margin-bottom: 0; }
-
 sup.cite { font-size: 9.5px; color: #4a6a8a; font-weight: 500; cursor: default; margin-left: 1px; }
-
-/* ── POLLING WIDGET ── */
-.poll-widget {
-  max-width: 1700px; margin: 0 auto 20px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 6px; padding: 18px 22px 20px;
-}
-.poll-widget-header {
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 10px; margin-bottom: 16px;
-}
-.poll-widget-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 14px; font-weight: 500; color: var(--text-primary);
-}
-.poll-widget-meta { font-size: 11px; color: var(--text-muted); }
-.poll-refresh-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px; font-weight: 500;
-  color: var(--text-secondary);
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 4px; padding: 5px 12px;
-  cursor: pointer; transition: background 0.15s, color 0.15s;
-  white-space: nowrap;
-}
-.poll-refresh-btn:hover { background: var(--border); color: var(--text-primary); }
-.poll-refresh-btn svg { flex-shrink: 0; }
-.poll-refresh-btn.spinning svg { animation: spin 0.7s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.poll-bars { display: flex; flex-direction: column; gap: 8px; }
-.poll-row {
-  display: grid;
-  grid-template-columns: 140px 1fr 40px;
-  align-items: center; gap: 10px;
-}
-.poll-name {
-  display: flex; align-items: center; gap: 7px;
-  font-size: 12.5px; font-weight: 500; color: var(--text-primary);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.poll-party-dot {
-  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-}
-.poll-party-dot.dem { background: var(--dem); }
-.poll-party-dot.rep { background: var(--rep); }
-.poll-bar-track {
-  height: 20px; background: var(--surface2); border-radius: 3px; overflow: hidden;
-  position: relative;
-}
-.poll-bar-fill {
-  height: 100%; border-radius: 3px;
-  transition: width 0.6s cubic-bezier(.4,0,.2,1);
-  display: flex; align-items: center; padding-left: 8px;
-  min-width: 4px;
-}
-.poll-bar-fill.dem { background: var(--dem); }
-.poll-bar-fill.rep { background: var(--rep); }
-.poll-bar-label {
-  font-size: 10.5px; font-weight: 500; color: rgba(255,255,255,0.92);
-  white-space: nowrap; overflow: hidden;
-}
-.poll-pct {
-  font-size: 12.5px; font-weight: 500; color: var(--text-secondary);
-  text-align: right;
-}
-.poll-source {
-  font-size: 10.5px; color: var(--text-muted); margin-top: 12px;
-  padding-top: 10px; border-top: 1px solid var(--border);
-  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
-  align-items: center;
-}
-.poll-timestamp { font-size: 10.5px; color: var(--text-muted); font-style: italic; }
-
 .sources-wrap { max-width: 1700px; margin: 24px auto 0; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 20px 24px; }
 .sources-wrap h3 { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 500; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
 .source-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 4px 24px; }
@@ -190,6 +131,8 @@ sup.cite { font-size: 9.5px; color: #4a6a8a; font-weight: 500; cursor: default; 
 .source-item:last-child { border-bottom: none; }
 .source-num { flex-shrink: 0; font-size: 10.5px; font-weight: 500; color: #4a6a8a; min-width: 20px; margin-top: 1px; }
 .source-title { font-weight: 500; color: var(--text-primary); }
+a.source-title { color: #1a3a5c; text-decoration: none; }
+a.source-title:hover { text-decoration: underline; }
 .source-pub { color: var(--text-muted); font-style: italic; }
 .source-date { color: var(--text-muted); }
 .footnote-bar { max-width: 1700px; margin: 14px auto 0; font-size: 11px; color: var(--text-muted); line-height: 1.7; padding-top: 10px; border-top: 1px solid var(--border); }
@@ -197,6 +140,46 @@ sup.cite { font-size: 9.5px; color: #4a6a8a; font-weight: 500; cursor: default; 
 </head>
 <body>
 
+<!-- ══════════════════════════════════════════════════════
+     POLL DATA — edit pct values here to update everything:
+     widget bars, column badges, and column order all refresh
+     ══════════════════════════════════════════════════════ -->
+<script>
+// ┌─────────────────────────────────────────────────────────┐
+// │  EDIT POLL NUMBERS HERE — everything updates from this  │
+// └─────────────────────────────────────────────────────────┘
+const POLL_DATA = {
+  hilton:       { pct: 16 },
+  steyer:       { pct: 15 },
+  becerra:      { pct: 13 },
+  bianco:       { pct: 10 },
+  porter:       { pct:  9 },
+  mahan:        { pct:  4 },
+  villaraigosa: { pct:  4 },
+  thurmond:     { pct:  1 },
+};
+
+// Candidate metadata (names, party, display labels) — edit if new candidates join
+const CANDIDATES = [
+  { id: "hilton",       name: "Steve Hilton",          party: "rep", partyLabel: "Republican",    wing: "Trump-Endorsed",       wingClass: "wing-trump", ctitle: "Former Fox News host &amp; UK strategist", initials: "SH", img: "images/hilton.jpg"       },
+  { id: "bianco",       name: "Chad Bianco",            party: "rep", partyLabel: "Republican",    wing: "Law &amp; Order Conservative", wingClass: "wing-cons",  ctitle: "Riverside County Sheriff",              initials: "CB", img: "images/bianco.jpg"       },
+  { id: "steyer",       name: "Tom Steyer",             party: "dem", partyLabel: "Democrat",      wing: "Progressive",          wingClass: "wing-prog",  ctitle: "Hedge fund founder &amp; climate activist", initials: "TS", img: "images/steyer.jpg"       },
+  { id: "becerra",      name: "Xavier Becerra",         party: "dem", partyLabel: "Democrat",      wing: "Mod-Progressive",      wingClass: "wing-prog",  ctitle: "Former HHS Secretary &amp; CA AG",          initials: "XB", img: "images/becerra.jpg"      },
+  { id: "porter",       name: "Katie Porter",           party: "dem", partyLabel: "Democrat",      wing: "Progressive",          wingClass: "wing-prog",  ctitle: "Former U.S. Rep., CA-47",                   initials: "KP", img: "images/porter.jpg"       },
+  { id: "mahan",        name: "Matt Mahan",             party: "dem", partyLabel: "Democrat",      wing: "Centrist",             wingClass: "wing-cent",  ctitle: "Mayor of San Jose",                         initials: "MM", img: "images/mahan.jpg"        },
+  { id: "villaraigosa", name: "Antonio Villaraigosa",   party: "dem", partyLabel: "Democrat",      wing: "Moderate",             wingClass: "wing-mod",   ctitle: "Former Mayor of L.A.",                      initials: "AV", img: "images/villaraigosa.jpg" },
+  { id: "thurmond",     name: "Tony Thurmond",          party: "dem", partyLabel: "Democrat",      wing: "Progressive",          wingClass: "wing-prog",  ctitle: "CA Supt. of Public Instruction",            initials: "TT", img: "images/thurmond.jpg"     },
+];
+
+// Merge poll numbers into candidate list and sort by pct desc
+function getSorted() {
+  return CANDIDATES
+    .map(c => ({ ...c, pct: POLL_DATA[c.id]?.pct ?? 0 }))
+    .sort((a, b) => b.pct - a.pct);
+}
+</script>
+
+<!-- PAGE HEADER -->
 <div class="page-header">
   <div>
     <h1>2026 California Governor<br>All Candidates Compared</h1>
@@ -204,113 +187,38 @@ sup.cite { font-size: 9.5px; color: #4a6a8a; font-weight: 500; cursor: default; 
     <p style="font-size:12px;color:var(--text-muted);margin-top:6px;">Compiled by <strong style="color:var(--text-secondary);">Kathie Xiao</strong></p>
   </div>
   <div class="meta-info">
-    Polling: Emerson College / Nexstar, Apr 22, 2026 <sup class="cite">[1]</sup><br>
+    Polling: CBS News / YouGov, Apr 23–27, 2026 <sup class="cite">[1]</sup><br>
     Fundraising: CA Secretary of State filings <sup class="cite">[2]</sup><br>
     Last updated: April 23, 2026
   </div>
 </div>
 
-<!-- ── POLLING WIDGET ── -->
+<!-- LAST UPDATED BAR -->
+<div class="updated-bar">
+  <span class="updated-bar-icon">✓</span>
+  <div>
+    <div class="updated-bar-text">Last updated: April 27, 2026 — CBS News / YouGov poll (April 23–27, 2026)</div>
+    <div class="updated-bar-sub">Polling reflects likely primary voters · MoE ±4.1 pts · Updated manually when new polls are published</div>
+  </div>
+</div>
+
+<!-- POLLING WIDGET -->
 <div class="poll-widget" id="pollWidget">
   <div class="poll-widget-header">
     <div>
       <div class="poll-widget-title">Primary Polling Snapshot</div>
-      <div class="poll-widget-meta">Emerson College / Nexstar · April 22, 2026 · All registered voters</div>
+      <div class="poll-widget-meta" id="pollMeta">CBS News / YouGov · April 23–27, 2026 · Likely primary voters</div>
     </div>
-    <button class="poll-refresh-btn" id="refreshBtn" onclick="refreshPolls()">
-      <svg id="refreshIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="23 4 23 10 17 10"></polyline>
-        <polyline points="1 20 1 14 7 14"></polyline>
-        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-      </svg>
-      Refresh polling data
-    </button>
+
   </div>
-
   <div class="poll-bars" id="pollBars"></div>
-
   <div class="poll-source">
-    <span>Source: <strong>Emerson College Polling / Nexstar Media Group</strong> · Apr 22, 2026 poll of California registered voters · n=1,000 · ±3% MoE</span>
-    <span class="poll-timestamp" id="pollTimestamp"></span>
+    <span>Source: <strong>Emerson College Polling / Nexstar Media Group</strong> · Apr 22, 2026 · n=1,000 · ±3% MoE</span>
+    <span class="poll-timestamp" id="pollTimestamp">CBS News / YouGov · April 23–27, 2026 · Likely primary voters · MoE ±4.1 pts</span>
   </div>
 </div>
 
-<script>
-const POLL_DATA = [
-  { name: "Steve Hilton",        party: "rep", pct: 17, title: "Republican" },
-  { name: "Chad Bianco",         party: "rep", pct: 14, title: "Republican" },
-  { name: "Tom Steyer",          party: "dem", pct: 14, title: "Democrat"   },
-  { name: "Xavier Becerra",      party: "dem", pct: 13, title: "Democrat"   },
-  { name: "Katie Porter",        party: "dem", pct: 10, title: "Democrat"   },
-  { name: "Matt Mahan",          party: "dem", pct:  5, title: "Democrat"   },
-  { name: "Antonio Villaraigosa",party: "dem", pct:  2, title: "Democrat"   },
-  { name: "Tony Thurmond",       party: "dem", pct:  2, title: "Democrat"   },
-];
-
-const MAX_PCT = 20; // scale max for bars
-
-function buildBars(data) {
-  const container = document.getElementById('pollBars');
-  container.innerHTML = '';
-  data.forEach(c => {
-    const barW = Math.max((c.pct / MAX_PCT) * 100, 1);
-    const row = document.createElement('div');
-    row.className = 'poll-row';
-    row.innerHTML = `
-      <div class="poll-name">
-        <div class="poll-party-dot ${c.party}"></div>
-        ${c.name}
-      </div>
-      <div class="poll-bar-track">
-        <div class="poll-bar-fill ${c.party}" style="width:0%">
-          <span class="poll-bar-label">${c.pct >= 8 ? c.title : ''}</span>
-        </div>
-      </div>
-      <div class="poll-pct">${c.pct}%</div>
-    `;
-    container.appendChild(row);
-    // Animate in
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        row.querySelector('.poll-bar-fill').style.width = barW + '%';
-      });
-    });
-  });
-}
-
-function setTimestamp() {
-  const now = new Date();
-  document.getElementById('pollTimestamp').textContent =
-    'Last refreshed: ' + now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-}
-
-function refreshPolls() {
-  const btn = document.getElementById('refreshBtn');
-  const icon = document.getElementById('refreshIcon');
-  btn.classList.add('spinning');
-  btn.disabled = true;
-
-  // Simulate a data refresh with slight randomised jitter (±1pp) to make
-  // it feel live — replace this fetch() call with a real endpoint if you
-  // wire up a live polling API later.
-  setTimeout(() => {
-    const jittered = POLL_DATA.map(c => ({
-      ...c,
-      pct: Math.max(1, c.pct + (Math.random() > 0.5 ? 0 : (Math.random() > 0.5 ? 1 : -1)))
-    })).sort((a, b) => b.pct - a.pct);
-
-    buildBars(jittered);
-    setTimestamp();
-    btn.classList.remove('spinning');
-    btn.disabled = false;
-  }, 900);
-}
-
-// Initial render
-buildBars(POLL_DATA);
-setTimestamp();
-</script>
-
+<!-- LEGEND -->
 <div class="top-legend">
   <strong style="font-size:12px;color:var(--text-primary);">Party:</strong>
   <div class="party-pip"><div class="party-swatch dem"></div><span>Democrat</span></div>
@@ -325,840 +233,497 @@ setTimestamp();
   <span class="tleg"><span class="tleg-dot" style="background:#e53935"></span>Record contradicts platform</span>
 </div>
 
+<!-- TABLE — columns injected by JS from POLL_DATA order -->
 <div class="scroll-wrap">
-<table class="grid">
-<thead>
-<tr>
-  <th class="row-label"></th>
-
-  <!-- 1. HILTON ~17% REP -->
-  <th class="col-head rep">
-    <div class="avatar-wrap">
-      <div class="party-tag rep"><div class="party-dot rep"></div>Republican</div>
-      <img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Steve_Hilton_Official_%28cropped%29.jpg/440px-Steve_Hilton_Official_%28cropped%29.jpg" alt="Steve Hilton" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="avatar-fallback" style="display:none;">SH</div>
-      <span class="cname">Steve Hilton</span>
-      <span class="ctitle">Former Fox News host &amp; UK strategist</span>
-      <span class="poll-badge">#1 · ~17% <sup style="color:rgba(255,255,255,0.65);font-size:8px;">[1]</sup></span>
-      <span class="wing-badge wing-trump">Trump-Endorsed</span>
-    </div>
-  </th>
-
-  <!-- 2. BIANCO ~14% REP -->
-  <th class="col-head rep">
-    <div class="avatar-wrap">
-      <div class="party-tag rep"><div class="party-dot rep"></div>Republican</div>
-      <img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Chad_Bianco_official_photo.jpg/440px-Chad_Bianco_official_photo.jpg" alt="Chad Bianco" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="avatar-fallback" style="display:none;">CB</div>
-      <span class="cname">Chad Bianco</span>
-      <span class="ctitle">Riverside County Sheriff</span>
-      <span class="poll-badge">#2 · ~14% <sup style="color:rgba(255,255,255,0.65);font-size:8px;">[1]</sup></span>
-      <span class="wing-badge wing-cons">Law &amp; Order Conservative</span>
-    </div>
-  </th>
-
-  <!-- 3. STEYER ~14% DEM -->
-  <th class="col-head dem">
-    <div class="avatar-wrap">
-      <div class="party-tag dem"><div class="party-dot dem"></div>Democrat</div>
-      <img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Tom_Steyer_2019_%28cropped%29.jpg/440px-Tom_Steyer_2019_%28cropped%29.jpg" alt="Tom Steyer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="avatar-fallback" style="display:none;">TS</div>
-      <span class="cname">Tom Steyer</span>
-      <span class="ctitle">Hedge fund founder &amp; climate activist</span>
-      <span class="poll-badge">#3 · ~14% <sup style="color:rgba(255,255,255,0.65);font-size:8px;">[1]</sup></span>
-      <span class="wing-badge wing-prog">Progressive</span>
-    </div>
-  </th>
-
-  <!-- 4. BECERRA ~13% DEM -->
-  <th class="col-head dem">
-    <div class="avatar-wrap">
-      <div class="party-tag dem"><div class="party-dot dem"></div>Democrat</div>
-      <img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Xavier_Becerra_official_portrait_%28cropped%29.jpg/440px-Xavier_Becerra_official_portrait_%28cropped%29.jpg" alt="Xavier Becerra" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="avatar-fallback" style="display:none;">XB</div>
-      <span class="cname">Xavier Becerra</span>
-      <span class="ctitle">Former HHS Secretary &amp; CA AG</span>
-      <span class="poll-badge">#4 · ~13% <sup style="color:rgba(255,255,255,0.65);font-size:8px;">[1]</sup></span>
-      <span class="wing-badge wing-prog">Mod-Progressive</span>
-    </div>
-  </th>
-
-  <!-- 5. PORTER ~10% DEM -->
-  <th class="col-head dem">
-    <div class="avatar-wrap">
-      <div class="party-tag dem"><div class="party-dot dem"></div>Democrat</div>
-      <img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Katie_Porter_official_photo_%28cropped%29.jpg/440px-Katie_Porter_official_photo_%28cropped%29.jpg" alt="Katie Porter" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="avatar-fallback" style="display:none;">KP</div>
-      <span class="cname">Katie Porter</span>
-      <span class="ctitle">Former U.S. Rep., CA-47</span>
-      <span class="poll-badge">#5 · ~10% <sup style="color:rgba(255,255,255,0.65);font-size:8px;">[1]</sup></span>
-      <span class="wing-badge wing-prog">Progressive</span>
-    </div>
-  </th>
-
-  <!-- 6. MAHAN ~5% DEM -->
-  <th class="col-head dem">
-    <div class="avatar-wrap">
-      <div class="party-tag dem"><div class="party-dot dem"></div>Democrat</div>
-      <img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Matt_Mahan_official_photo_%28cropped%29.jpg/440px-Matt_Mahan_official_photo_%28cropped%29.jpg" alt="Matt Mahan" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="avatar-fallback" style="display:none;">MM</div>
-      <span class="cname">Matt Mahan</span>
-      <span class="ctitle">Mayor of San Jose</span>
-      <span class="poll-badge">#6 · ~5% <sup style="color:rgba(255,255,255,0.65);font-size:8px;">[1]</sup></span>
-      <span class="wing-badge wing-cent">Centrist</span>
-    </div>
-  </th>
-
-  <!-- 7. VILLARAIGOSA ~2% DEM -->
-  <th class="col-head dem">
-    <div class="avatar-wrap">
-      <div class="party-tag dem"><div class="party-dot dem"></div>Democrat</div>
-      <img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Antonio_Villaraigosa_official_photo.jpg/440px-Antonio_Villaraigosa_official_photo.jpg" alt="Antonio Villaraigosa" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="avatar-fallback" style="display:none;">AV</div>
-      <span class="cname">Antonio Villaraigosa</span>
-      <span class="ctitle">Former Mayor of L.A.</span>
-      <span class="poll-badge">#7 · ~2% <sup style="color:rgba(255,255,255,0.65);font-size:8px;">[1]</sup></span>
-      <span class="wing-badge wing-mod">Moderate</span>
-    </div>
-  </th>
-
-  <!-- 8. THURMOND ~2% DEM -->
-  <th class="col-head dem">
-    <div class="avatar-wrap">
-      <div class="party-tag dem"><div class="party-dot dem"></div>Democrat</div>
-      <img class="avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Tony_Thurmond_official_photo.jpg/440px-Tony_Thurmond_official_photo.jpg" alt="Tony Thurmond" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="avatar-fallback" style="display:none;">TT</div>
-      <span class="cname">Tony Thurmond</span>
-      <span class="ctitle">CA Supt. of Public Instruction</span>
-      <span class="poll-badge">#8 · ~2% <sup style="color:rgba(255,255,255,0.65);font-size:8px;">[1]</sup></span>
-      <span class="wing-badge wing-prog">Progressive</span>
-    </div>
-  </th>
-</tr>
-</thead>
-<tbody>
-
-<!-- ═══════════════ BACKGROUND ═══════════════ -->
-<tr>
-  <td class="row-label">Background &amp; Personal</td>
-
-  <td class="rep-cell"><ul class="bl">
-    <li>Born 1969, London; son of Hungarian refugees who fled the 1956 Soviet invasion — family anglicised surname from Hircsák to Hilton<sup class="cite">[19]</sup></li>
-    <li>Father was Hungary's national ice hockey team goalkeeper; family worked catering at Heathrow after arriving penniless; parents divorced when Steve was 5<sup class="cite">[19]</sup></li>
-    <li>Won bursary to Christ's Hospital boarding school; Oxford PPE degree<sup class="cite">[19]</sup></li>
-    <li>Senior strategy adviser to UK PM David Cameron at 10 Downing Street (2010–12)<sup class="cite">[20]</sup></li>
-    <li>Married to Rachel Whetstone (Chief Communications Officer, Netflix) since 2008; two sons<sup class="cite">[19]</sup></li>
-    <li>Moved to California in 2012; became U.S. citizen 2021; lives in Atherton, Silicon Valley; taught at Stanford's d.school<sup class="cite">[20]</sup></li>
-  </ul></td>
-
-  <td class="rep-cell"><ul class="bl">
-    <li>Born Oct 9, 1967, Hill Air Force Base, Utah; eldest of three sons; grew up in a small mining town<sup class="cite">[21]</sup></li>
-    <li>Moved to California 1989; graduated top of class, San Bernardino Sheriff's Academy (1993); 32-year Riverside County career<sup class="cite">[21]</sup></li>
-    <li>Married to Denise Bianco; four adult children; four grandchildren; lives in Woodcrest, Riverside<sup class="cite">[21]</sup></li>
-    <li>Active member of Sandals Church, Riverside — faith and family central to public identity<sup class="cite">[21]</sup></li>
-    <li>Affiliated with Constitutional Sheriffs and Peace Officers Association (CSPOA)<sup class="cite">[22]</sup></li>
-    <li>Former Oath Keepers member (paid $40 in 2014, says he did not renew) — exposed in 2021 data breach<sup class="cite">[21]</sup></li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Born 1957, NYC; Yale BA, Stanford MBA<sup class="cite">[3]</sup></li>
-    <li>Founded Farallon Capital (1986); ~$2.4B fortune<sup class="cite">[3]</sup></li>
-    <li>Married to philanthropist Kat Taylor; four adult children; co-founded TomKat Ranch and climate foundations<sup class="cite">[3]</sup></li>
-    <li>Spent $300M+ on 2020 presidential run; founded NextGen Climate<sup class="cite">[4]</sup></li>
-    <li>No formal religious affiliation; describes environmental and spiritual values</li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Born 1958, Sacramento; parents were Mexican immigrants; Stanford BA, UCLA Law<sup class="cite">[5]</sup></li>
-    <li>Married to Dr. Carolina Reyes, a high-risk OB-GYN — frequently cited in his healthcare platform<sup class="cite">[5]</sup></li>
-    <li>Catholic; first Latino CA AG and first Latino HHS Secretary<sup class="cite">[5]</sup></li>
-    <li>Surged from 4% → 13% in polls after Swalwell's exit<sup class="cite">[1]</sup></li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Born 1974, Fort Dodge, Iowa; grew up on a farm; Yale BA, Harvard Law<sup class="cite">[6]</sup></li>
-    <li>Single mother of three; cites parenting as central to her cost-of-living platform<sup class="cite">[7]</sup></li>
-    <li>Interned for Sen. Chuck Grassley (R-IA) as an undergrad; UC Irvine consumer law professor before politics<sup class="cite">[6]</sup></li>
-    <li>No formal religious affiliation publicly stated</li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Born 1982; grew up working-class in Watsonville, CA; father a letter carrier, mother a schoolteacher<sup class="cite">[8]</sup></li>
-    <li>Harvard grad (magna cum laude, 2005); raised Catholic; attended Bellarmine Prep on a low-income scholarship<sup class="cite">[8]</sup></li>
-    <li>Married to Silvia-Wedad Scandar (met at Harvard); two children; lives in San Jose's Almaden Valley<sup class="cite">[8]</sup></li>
-    <li>Co-founded Brigade Media (civic tech) before entering politics</li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Born 1953, East LA; parents were Mexican immigrants; Cal State LA BA; Peoples College of Law<sup class="cite">[10]</sup></li>
-    <li>Catholic; faith central to his community organizing roots</li>
-    <li>Married three times; high-profile extramarital affair while serving as LA Mayor<sup class="cite">[10]</sup></li>
-    <li>First Latino CA Assembly Speaker; co-chaired Clinton's 2008 campaign; chaired 2012 DNC<sup class="cite">[10]</sup></li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Born 1964, Philadelphia; grew up on public assistance in a low-income family<sup class="cite">[11]</sup></li>
-    <li>Saint Mary's College BA; SF State MA in Social Work; career social worker before politics<sup class="cite">[11]</sup></li>
-    <li>Married; children; lives in Oakland</li>
-    <li>CA Assembly member (Bay Area) before becoming Supt. in 2019 — only current statewide officeholder in the field<sup class="cite">[11]</sup></li>
-  </ul></td>
-</tr>
-
-<!-- ═══════════════ PLATFORM ═══════════════ -->
-<tr>
-  <td class="row-label">Core Platform</td>
-
-  <td class="rep-cell"><ul class="bl">
-    <li>"Califordable": $3 gas, cut electric bills in half, first $100K income tax-free<sup class="cite">[20]</sup></li>
-    <li>7.5% flat income tax over $100K; no property tax increases<sup class="cite">[20]</sup></li>
-    <li>Strip housing regulations; cap developer fees; expand development outside cities<sup class="cite">[20]</sup></li>
-    <li>Grade/reward teachers; fire lowest performers; expand charter schools<sup class="cite">[20]</sup></li>
-    <li>Crack down on homelessness, crime, drugs, illegal immigration<sup class="cite">[20]</sup></li>
-    <li>Work cooperatively with Trump; end Sacramento "one-party rule"<sup class="cite">[20]</sup></li>
-  </ul></td>
-
-  <td class="rep-cell"><ul class="bl">
-    <li>Public safety as top priority; fully fund and staff law enforcement<sup class="cite">[22]</sup></li>
-    <li>Enforce encampment clearances; expand drug/alcohol treatment<sup class="cite">[22]</sup></li>
-    <li>Eliminate CEQA; expedite housing approvals<sup class="cite">[22]</sup></li>
-    <li>Reduce taxes for working families; halt overregulation<sup class="cite">[22]</sup></li>
-    <li>Election integrity; "constitutional sheriff" philosophy — local authority above state<sup class="cite">[22]</sup></li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Single-payer healthcare<sup class="cite">[4]</sup></li>
-    <li>Wealth tax on billionaires (including himself)<sup class="cite">[4]</sup></li>
-    <li>Reform PG&amp;E; overhaul CPUC utility regulation<sup class="cite">[12]</sup></li>
-    <li>Prop 13 reform; 100% clean energy</li>
-    <li>Stand up to Trump and federal overreach</li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Lower drug costs; protect and expand ACA<sup class="cite">[5]</sup></li>
-    <li>Build affordable housing; protect renters</li>
-    <li>Lower statewide cost of living</li>
-    <li>Defend CA against Trump on immigration, healthcare, rights</li>
-    <li>Disaster preparedness with equity focus</li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Consumer protection — fight Big Pharma and insurers<sup class="cite">[7]</sup></li>
-    <li>No corporate or PAC donations — ever<sup class="cite">[7]</sup></li>
-    <li>Lower cost of living; fight tariff impacts</li>
-    <li>Transit-oriented housing; expand Section 8<sup class="cite">[6]</sup></li>
-    <li>100% renewable energy; protect reproductive rights</li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Homelessness: shelter-or-leave enforcement<sup class="cite">[8]</sup></li>
-    <li>Suspend state gas tax for working families<sup class="cite">[13]</sup></li>
-    <li>Cut government waste; Sacramento accountability</li>
-    <li>Law enforcement support; backed Prop 36<sup class="cite">[8]</sup></li>
-    <li>Break with progressive establishment</li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Housing affordability (ballot title: "Housing Affordability Advocate")</li>
-    <li>Expand police / strengthen public safety<sup class="cite">[10]</sup></li>
-    <li>Charter school expansion; education reform</li>
-    <li>Moderate, deal-making governance; Latino community champion</li>
-  </ul></td>
-
-  <td class="dem-cell"><ul class="bl">
-    <li>Education equity — universal pre-K, equitable funding<sup class="cite">[11]</sup></li>
-    <li>Mental health services in every school</li>
-    <li>Poverty reduction and safety net expansion</li>
-    <li>Defend DEI programs; support billionaire tax<sup class="cite">[11]</sup></li>
-  </ul></td>
-</tr>
-
-<!-- ═══════════════ PLATFORM VS RECORD ═══════════════ -->
-<tr>
-  <td class="row-label">Platform vs. Record</td>
-
-  <td class="rep-cell">
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">Founded Golden Together (2023) — bipartisan nonprofit on housing and homelessness before launching candidacy<sup class="cite">[20]</sup></span>
-      <span class="ti-link">✦ Backs governance reform platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">Never held elected office — only experience is advising Cameron in the UK and hosting Fox News; no government accountability record<sup class="cite">[19]</sup></span>
-      <span class="ti-link">✦ Undercuts executive competence claims</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body">
-      <span class="ti-text">Lives in Atherton (one of CA's wealthiest zip codes) while running on "Califordable" for working families</span>
-      <span class="ti-link">✦ Mixed credibility on affordability platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body">
-      <span class="ti-text">Launched campaign as "nonpartisan"; quickly embraced Trump's endorsement — raises questions about consistency<sup class="cite">[20]</sup></span>
-      <span class="ti-link">✦ Complicates crossover voter appeal</span>
-    </div></div>
-  </td>
-
-  <td class="rep-cell">
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">Re-elected as Riverside County Sheriff in 2022 with ~60% of vote — genuine community support<sup class="cite">[21]</sup></span>
-      <span class="ti-link">✦ Backs public safety platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">Riverside Sheriff ranks dead last (57th of 57 CA sheriffs) in crime clearance — only 9.2% of major crimes solved, less than half the state average<sup class="cite">[22]</sup></span>
-      <span class="ti-link">✦ Directly contradicts law-and-order platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">2022: 18 inmate deaths in Riverside jails — highest in 15 years; CA DOJ launched unconstitutional policing investigation<sup class="cite">[21]</sup></span>
-      <span class="ti-link">✦ Undercuts public safety platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">Ordered seizure of 650,000 ballots (Apr 2026) citing fraud — CA Supreme Court ordered warrants unsealed; affidavits revealed claims came solely from a citizen activist group<sup class="cite">[21]</sup></span>
-      <span class="ti-link">✦ Undercuts election integrity platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body">
-      <span class="ti-text">Knelt with BLM protesters in 2020; called same protests "destructive riots" in 2023<sup class="cite">[21]</sup></span>
-      <span class="ti-link">✦ Mixed — credibility gap on consistency</span>
-    </div></div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">Spent hundreds of millions via NextGen Climate on clean energy ballot measures for 15+ years<sup class="cite">[3]</sup></span>
-      <span class="ti-link">✦ Backs climate platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">Supports CA Billionaire Tax that would hit himself; says "people like me should pay more"<sup class="cite">[4]</sup></span>
-      <span class="ti-link">✦ Backs wealth tax platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">Farallon Capital invested in private prisons and fossil fuels — directly contradicts his platforms<sup class="cite">[3]</sup></span>
-      <span class="ti-link">✦ Undercuts climate + anti-corporate platforms</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body">
-      <span class="ti-text">$120M self-funded ad blitz fuels "buying the election" narrative — tension with anti-oligarch messaging<sup class="cite">[12]</sup></span>
-      <span class="ti-link">✦ Mixed signal on anti-corporate platform</span>
-    </div></div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">As HHS Sec., expanded coverage to 24M+ Americans; negotiated Medicare drug-price reductions<sup class="cite">[5]</sup></span>
-      <span class="ti-link">✦ Backs healthcare platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">Filed 122 suits vs. Trump as CA AG on immigration, ACA, environment, and reproductive rights<sup class="cite">[5]</sup></span>
-      <span class="ti-link">✦ Backs "beat Trump" platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">85,000+ migrant children lost from federal tracking at HHS; NYT documented systemic failures<sup class="cite">[14]</sup></span>
-      <span class="ti-link">✦ Undercuts equity + care platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">Former chief of staff pleaded guilty to wire/bank fraud involving a Becerra campaign account<sup class="cite">[14]</sup></span>
-      <span class="ti-link">✦ Undercuts clean governance claims</span>
-    </div></div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">Has never accepted corporate or PAC money — consistent across entire House career<sup class="cite">[7]</sup></span>
-      <span class="ti-link">✦ Directly matches no-corporate-money platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">Held corporate execs accountable in high-profile congressional hearings on pharma and banking<sup class="cite">[6]</sup></span>
-      <span class="ti-link">✦ Backs consumer protection platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">Lost 2024 Senate primary to Schiff — statewide electability remains unproven<sup class="cite">[6]</sup></span>
-      <span class="ti-link">✦ Undercuts "can win" narrative</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body">
-      <span class="ti-text">Staff-berating videos and CBS interview walkout raised temperament concerns; 30 ex-staffers vouched for her<sup class="cite">[15]</sup></span>
-      <span class="ti-link">✦ Mixed — fueled electability questions</span>
-    </div></div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">Claims ~33% reduction in street homelessness in San Jose; built tiny home villages and shelter capacity<sup class="cite">[8]</sup></span>
-      <span class="ti-link">✦ Backs homelessness platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">Redirected voter-approved Measure E affordable housing funds toward temporary shelter<sup class="cite">[8]</sup></span>
-      <span class="ti-link">✦ Undercuts long-term housing claims</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">Left City Council mid-term for mayor's race; now leaving mayor's office for governor — repeated stepping-stone pattern<sup class="cite">[8]</sup></span>
-      <span class="ti-link">✦ Undercuts accountability platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body">
-      <span class="ti-text">Top strategist departed mid-race; $35M escrow fundraising scheme drew campaign finance scrutiny<sup class="cite">[16]</sup></span>
-      <span class="ti-link">✦ Complicates "clean government" message</span>
-    </div></div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">As LA Mayor, increased LAPD and oversaw Measure R — billions in new transit infrastructure<sup class="cite">[10]</sup></span>
-      <span class="ti-link">✦ Backs public safety + infrastructure platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body">
-      <span class="ti-text">Charter school advocacy alienated teachers unions — meaningful reform, but divisive with core Democratic base<sup class="cite">[10]</sup></span>
-      <span class="ti-link">✦ Mixed on education platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">Extramarital affair while Mayor; lost 2018 governor's race despite strong name ID going in<sup class="cite">[10]</sup></span>
-      <span class="ti-link">✦ Undermines trust and electability claims</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body">
-      <span class="ti-text">Polling at ~2% despite years of name recognition — unable to build a viable base<sup class="cite">[1]</sup></span>
-      <span class="ti-link">✦ Contradicts "proven winner" messaging</span>
-    </div></div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">As Supt., expanded mental health access and equity programs in CA schools<sup class="cite">[11]</sup></span>
-      <span class="ti-link">✦ Backs education + mental health platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body">
-      <span class="ti-text">Only candidate currently in a statewide elected seat — actions publicly on record in real time</span>
-      <span class="ti-link">✦ Backs transparency platform</span>
-    </div></div>
-    <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body">
-      <span class="ti-text">CA schools have persistent outcome gaps despite his advocacy — critics question impact of his tenure<sup class="cite">[11]</sup></span>
-      <span class="ti-link">✦ Complicates education-as-credential platform</span>
-    </div></div>
-  </td>
-</tr>
-
-<!-- ═══════════════ FUNDRAISING ═══════════════ -->
-<tr>
-  <td class="row-label">Fundraising &amp; Major Donors</td>
-
-  <td class="rep-cell">
-    <p class="donor-total">$7.1M <sup class="cite">[2]</sup></p>
-    <p class="donor-note-sm">18,000+ individual contributions — broad small-donor base for a Republican</p>
-    <div class="chips">
-      <span class="chip">Lighthouse Worldwide Solutions Inc.</span>
-      <span class="chip">Silicon Valley tech-aligned individuals</span>
-    </div>
-    <p class="donor-note-sm">Wife Rachel Whetstone (Netflix CCO) brings significant tech industry connectivity</p>
-  </td>
-
-  <td class="rep-cell">
-    <p class="donor-total">Lowest major-candidate fundraising <sup class="cite">[2]</sup></p>
-    <p class="donor-note-sm">Reliant on small-donor base and law enforcement community</p>
-    <div class="chips">
-      <span class="chip">Peace Officers Research Assoc. of CA</span>
-      <span class="chip">Law enforcement PACs</span>
-      <span class="chip">Claremont Institute (conservative think tank)<sup class="cite">[21]</sup></span>
-    </div>
-    <p class="donor-note-sm">Running 7-figure TV ad blitz despite smaller fundraising base<sup class="cite">[22]</sup></p>
-  </td>
-
-  <td class="dem-cell">
-    <p class="donor-total">$122.7M <sup class="cite">[2]</sup></p>
-    <p class="donor-note-sm">99%+ self-funded ($122.5M of own money)</p>
-    <div class="chips"><span class="chip">Self (Farallon Capital fortune)</span></div>
-    <p class="warn-note">⚠ PG&E, real estate groups &amp; prison guard unions funded a $10M anti-Steyer PAC<sup class="cite">[12]</sup></p>
-  </td>
-
-  <td class="dem-cell">
-    <p class="donor-total">$2.9M <sup class="cite">[2]</sup></p>
-    <p class="donor-note-sm">2,885 contributions — smallest war chest among top Dems</p>
-    <div class="chips"><span class="chip chip-warn">⚠ Chevron</span></div>
-    <p class="warn-note">⚠ Chevron donation notable for a candidate running against corporate power<sup class="cite">[2]</sup></p>
-  </td>
-
-  <td class="dem-cell">
-    <p class="donor-total">$6.2M <sup class="cite">[2]</sup></p>
-    <p class="donor-note-sm">48,000+ contributors; avg. donation ~$38 — most individual donors in race</p>
-    <div class="chips">
-      <span class="chip">Nat'l Union Hospital &amp; Healthcare Employees</span>
-      <span class="chip">CWA District 9</span>
-      <span class="chip">Emily's List</span>
-      <span class="chip">End Citizens United</span>
-    </div>
-    <p class="ok-note">✓ Refuses corporate and PAC money — fully consistent with platform<sup class="cite">[7]</sup></p>
-  </td>
-
-  <td class="dem-cell">
-    <p class="donor-total">$12.7M <sup class="cite">[2]</sup></p>
-    <p class="donor-note-sm">Only 615 contributions — nearly all maxed-out billionaires ($78,400 each)</p>
-    <div class="chips">
-      <span class="chip chip-warn">⚠ Sergey Brin (Google co-founder)</span>
-      <span class="chip chip-warn">⚠ Joe Lonsdale (Palantir co-founder)</span>
-      <span class="chip chip-warn">⚠ Garry Tan (YCombinator CEO)</span>
-      <span class="chip">David Baszucki (Roblox CEO)</span>
-      <span class="chip">Rick Caruso</span>
-    </div>
-    <p class="warn-note">⚠ Peter Thiel-linked donors in base; Palantir works with Trump admin; donors oppose billionaire tax Mahan has criticized<sup class="cite">[17]</sup></p>
-  </td>
-
-  <td class="dem-cell">
-    <p class="donor-total">$7.0M <sup class="cite">[2]</sup></p>
-    <p class="donor-note-sm">1,471 contributions; mid-tier fundraising</p>
-    <div class="chips">
-      <span class="chip chip-warn">⚠ Chevron</span>
-      <span class="chip">CA State Assoc. of Electrical Workers</span>
-      <span class="chip">CA State Pipe Trades Council PAC</span>
-    </div>
-    <p class="warn-note">⚠ Chevron donation raises eyebrows for a Democrat running on affordability<sup class="cite">[2]</sup></p>
-  </td>
-
-  <td class="dem-cell">
-    <p class="donor-total">$1.6M <sup class="cite">[2]</sup></p>
-    <p class="donor-note-sm">1,769 contributions — lowest among Democrats</p>
-    <div class="chips">
-      <span class="chip">Labor and education advocacy groups</span>
-      <span class="chip">Progressive organizations</span>
-    </div>
-    <p class="ok-note">✓ No major corporate donors; grassroots-heavy but underfunded<sup class="cite">[2]</sup></p>
-  </td>
-</tr>
-
-<!-- ═══════════════ KEY ENDORSEMENTS ═══════════════ -->
-<tr>
-  <td class="row-label">Key Endorsements</td>
-
-  <td class="rep-cell">
-    <div class="end-item">President Donald Trump (Apr 6, 2026)<sup class="cite">[20]</sup></div>
-    <div class="end-item">Vivek Ramaswamy (2024 GOP presidential candidate)</div>
-    <div class="end-item">Gloria Romero (running mate, Lt. Gov. race)</div>
-  </td>
-
-  <td class="rep-cell">
-    <div class="end-item">CA Republican Assembly<sup class="cite">[22]</sup></div>
-    <div class="end-item">Peace Officers Research Assoc. of CA</div>
-    <div class="end-item">Assemblymembers Greg Wallis &amp; Laurie Davies</div>
-    <div class="end-item">SF Sheriff Paul Miyamoto</div>
-    <div class="end-item">Claremont Institute (2023 Sheriff Award)<sup class="cite">[21]</sup></div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item">Our Revolution (Bernie Sanders org)<sup class="cite">[4]</sup></div>
-    <div class="end-item">Former Senate Pres. Pro Tem Toni Atkins</div>
-    <div class="end-item">Several CA Assembly members (post-Swalwell)</div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item">Wave of former Swalwell supporters<sup class="cite">[1]</sup></div>
-    <div class="end-item">Growing CA Assembly member coalition</div>
-    <div class="end-item">CA Democratic establishment consolidation pick</div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item">Sen. Elizabeth Warren<sup class="cite">[7]</sup></div>
-    <div class="end-item">Emily's List · End Citizens United</div>
-    <div class="end-item">CWA District 9 · CA Federation of Labor (co-endorsement)</div>
-    <div class="end-item">Rep. Robert Garcia</div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item">Rep. Sam Liccardo (predecessor as SJ Mayor)<sup class="cite">[17]</sup></div>
-    <div class="end-item">Y Combinator CEO Garry Tan</div>
-    <div class="end-item">Silicon Valley tech community (financial backing)</div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item">LA Mayor Karen Bass<sup class="cite">[10]</sup></div>
-    <div class="end-item">Former Sen. Barbara Boxer</div>
-    <div class="end-item">Building trades unions</div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item">Progressive educators and equity advocates</div>
-    <div class="end-item">Some Assembly members (post-Swalwell)</div>
-  </td>
-</tr>
-
-<!-- ═══════════════ KEY OPPOSITION ═══════════════ -->
-<tr>
-  <td class="row-label">Key Opposition</td>
-
-  <td class="rep-cell">
-    <div class="end-item opp">All Democratic candidates oppose him as Trump-aligned</div>
-    <div class="end-item opp">Got only 44% of CA Republican delegate votes vs. Bianco's 49% at GOP convention — neither reached 60% threshold<sup class="cite">[56]</sup></div>
-    <div class="end-item opp">Critics: wasn't a U.S. citizen until 2021 — authenticity questions for someone claiming to "fix California"</div>
-  </td>
-
-  <td class="rep-cell">
-    <div class="end-item opp">CA Dept. of Justice (launched unconstitutional policing investigation)<sup class="cite">[21]</sup></div>
-    <div class="end-item opp">CA Supreme Court (ordered ballot seizure warrants unsealed)<sup class="cite">[21]</sup></div>
-    <div class="end-item opp">Center on Juvenile &amp; Criminal Justice (damning crime clearance data)<sup class="cite">[22]</sup></div>
-    <div class="end-item opp">Active civil rights lawsuits over jail deaths<sup class="cite">[21]</sup></div>
-    <div class="end-item opp">Trump's endorsement of Hilton over Bianco — significant blow<sup class="cite">[20]</sup></div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item opp">PG&E ($10M anti-Steyer PAC)<sup class="cite">[12]</sup></div>
-    <div class="end-item opp">CA real estate and construction industry (PAC funding)</div>
-    <div class="end-item opp">Prison guard union (CA Correctional Peace Officers Assoc.)</div>
-    <div class="end-item opp">Porter and Mahan attack him by name on fossil fuel/prison investments</div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item opp">Villaraigosa — launched attack websites on Becerra's record<sup class="cite">[14]</sup></div>
-    <div class="end-item opp">Mahan calls him "a D.C. insider the establishment is rallying around"<sup class="cite">[13]</sup></div>
-    <div class="end-item opp">Critics cite migrant children failures and fraud scandal around former staff<sup class="cite">[14]</sup></div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item opp">Our Revolution (backed Steyer over Porter)<sup class="cite">[4]</sup></div>
-    <div class="end-item opp">Multiple opponents citing temperament videos<sup class="cite">[15]</sup></div>
-    <div class="end-item opp">Former Swalwell endorsers who moved to Becerra rather than Porter</div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item opp">AFSCME Local 101 (city workers union)<sup class="cite">[8]</sup></div>
-    <div class="end-item opp">Assemblymembers Ash Kalra and Alex Lee ("millionaire tech puppet")<sup class="cite">[17]</sup></div>
-    <div class="end-item opp">San José Spotlight editorial called on him not to run<sup class="cite">[8]</sup></div>
-    <div class="end-item opp">CA Democratic Party chair asked single-digit candidates to drop out</div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item opp">California Teachers Association (charter school stance)</div>
-    <div class="end-item opp">CA Democratic Party chair publicly asked him to drop out<sup class="cite">[18]</sup></div>
-    <div class="end-item opp">Porter attacked him at debate for "cashing corporate checks for 40 years"<sup class="cite">[13]</sup></div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="end-item opp">CA Democratic Party chair asked him to step aside<sup class="cite">[18]</sup></div>
-    <div class="end-item opp">Political analysts cite him as a spoiler risk to Democratic primary chances</div>
-  </td>
-</tr>
-
-<!-- ═══════════════ SUPPORTERS SAY ═══════════════ -->
-<tr>
-  <td class="row-label">Supporters Say</td>
-
-  <td class="rep-cell">
-    <div class="voice-block sup">
-      <div class="voice-label sup">Supporters say</div>
-      <ul>
-        <li>His origin story — son of Hungarian refugees on UK welfare — gives authentic credibility on opportunity and freedom<sup class="cite">[19]</sup></li>
-        <li>Only candidate with both Silicon Valley smarts and Trump's backing — a winning coalition<sup class="cite">[20]</sup></li>
-        <li>"Positive populism" offers practical solutions, not just conservative grievance politics<sup class="cite">[20]</sup></li>
-        <li>Trump endorsement consolidates Republican voters and gives Democrats a real general election threat<sup class="cite">[20]</sup></li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="rep-cell">
-    <div class="voice-block sup">
-      <div class="voice-label sup">Supporters say</div>
-      <ul>
-        <li>A real law enforcement officer with 32 years on the job — not a politician or TV host<sup class="cite">[21]</sup></li>
-        <li>Re-elected with 60% of the vote — genuine community trust, not manufactured support<sup class="cite">[21]</sup></li>
-        <li>Stood up to state COVID mandates; faith and family story resonates with communities Sacramento ignores<sup class="cite">[85]</sup></li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block sup">
-      <div class="voice-label sup">Supporters say</div>
-      <ul>
-        <li>The entities funding attack ads against him prove he's the real threat to the corporate status quo<sup class="cite">[4]</sup></li>
-        <li>15+ years of climate activism are real — he built NextGen from scratch<sup class="cite">[3]</sup></li>
-        <li>He's willing to tax himself — that takes genuine conviction<sup class="cite">[4]</sup></li>
-        <li>No executive office means no record of Sacramento compromise</li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block sup">
-      <div class="voice-label sup">Supporters say</div>
-      <ul>
-        <li>The steadiest hand after Swalwell's chaos — dependable and trustworthy<sup class="cite">[1]</sup></li>
-        <li>He's actually beaten Trump in court 122 times — a real record, not a promise<sup class="cite">[5]</sup></li>
-        <li>HHS tenure expanded coverage to millions against fierce opposition</li>
-        <li>First Latino in multiple top offices — a meaningful representation milestone</li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block sup">
-      <div class="voice-label sup">Supporters say</div>
-      <ul>
-        <li>The only candidate who has never taken a dollar from corporations — ever<sup class="cite">[7]</sup></li>
-        <li>Has the most organized labor support of any Democrat in the race<sup class="cite">[7]</sup></li>
-        <li>Her whiteboard record is the longest and most consistent progressive record in the field</li>
-        <li>As a single mom she uniquely understands the cost-of-living pressures families face</li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block sup">
-      <div class="voice-label sup">Supporters say</div>
-      <ul>
-        <li>Actually delivered on homelessness in San Jose — real shelters and tiny homes, not just talk<sup class="cite">[8]</sup></li>
-        <li>The only centrist Democrat — can appeal to no-party-preference voters no other Dem is reaching<sup class="cite">[17]</sup></li>
-        <li>Pragmatic problem-solver California needs after years of ideological governance</li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block sup">
-      <div class="voice-label sup">Supporters say</div>
-      <ul>
-        <li>Most experienced executive in the race — ran America's 2nd largest city for two full terms<sup class="cite">[10]</sup></li>
-        <li>His transit record in LA is a tangible, enduring legacy — billions in new rail<sup class="cite">[10]</sup></li>
-        <li>Deep roots in LA's Latino community give him authenticity no other candidate can match</li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block sup">
-      <div class="voice-label sup">Supporters say</div>
-      <ul>
-        <li>He's lived the California Dream from poverty — he knows what these programs mean<sup class="cite">[11]</sup></li>
-        <li>Education is the defining civil rights issue of our time and he's spent his career on it</li>
-        <li>As the only current officeholder, his record is being made in real time — full accountability</li>
-      </ul>
-    </div>
-  </td>
-</tr>
-
-<!-- ═══════════════ DETRACTORS SAY ═══════════════ -->
-<tr>
-  <td class="row-label">Detractors Say</td>
-
-  <td class="rep-cell">
-    <div class="voice-block det">
-      <div class="voice-label det">Detractors say</div>
-      <ul>
-        <li>Wasn't a U.S. citizen until 2021 — a British man who became American specifically to run for governor<sup class="cite">[19]</sup></li>
-        <li>Never held elected office; only "executive" experience is advising David Cameron and hosting Fox News<sup class="cite">[19]</sup></li>
-        <li>Lives in Atherton (one of CA's wealthiest zip codes) while running on working-family affordability</li>
-        <li>Pivoted from "nonpartisan" to Trump-endorsed in 12 months — opportunism over principle<sup class="cite">[20]</sup></li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="rep-cell">
-    <div class="voice-block det">
-      <div class="voice-label det">Detractors say</div>
-      <ul>
-        <li>His department ranks dead last among all 57 CA sheriffs in crime clearance — the worst possible track record for a "law and order" candidate<sup class="cite">[22]</sup></li>
-        <li>18 inmate deaths in one year; the state launched a formal unconstitutional policing investigation<sup class="cite">[21]</sup></li>
-        <li>Ballot seizure was based entirely on a citizen activist group's claims — courts called it baseless<sup class="cite">[21]</sup></li>
-        <li>Former Oath Keepers membership and "constitutional sheriff" ideology are well outside California's mainstream<sup class="cite">[22]</sup></li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block det">
-      <div class="voice-label det">Detractors say</div>
-      <ul>
-        <li>Made his billions off the same fossil fuel and private prison industries he now claims to oppose<sup class="cite">[3]</sup></li>
-        <li>Our Revolution endorsing a billionaire is the height of progressive hypocrisy<sup class="cite">[4]</sup></li>
-        <li>$120M in self-funded ads is buying name recognition, not earning it<sup class="cite">[12]</sup></li>
-        <li>Never held elected office — no executive accountability record</li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block det">
-      <div class="voice-label det">Detractors say</div>
-      <ul>
-        <li>Largely invisible during COVID when it mattered — reportedly reprimanded by White House for slow responses<sup class="cite">[14]</sup></li>
-        <li>85,000 migrant children were lost from federal tracking on his watch<sup class="cite">[14]</sup></li>
-        <li>Former chief of staff convicted of fraud involving his own campaign account<sup class="cite">[14]</sup></li>
-        <li>Took Chevron money — hard to square with "fighting for the people"<sup class="cite">[2]</sup></li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block det">
-      <div class="voice-label det">Detractors say</div>
-      <ul>
-        <li>Already lost one statewide race to Schiff — electability at scale is unproven<sup class="cite">[6]</sup></li>
-        <li>Staff-berating videos and CBS walkout are disqualifying for someone running a $300B state budget<sup class="cite">[15]</sup></li>
-        <li>"Whiteboard warrior" brand doesn't translate to executive leadership</li>
-        <li>Dropped from 18% to 10% for a reason — momentum stalled at a critical moment<sup class="cite">[1]</sup></li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block det">
-      <div class="voice-label det">Detractors say</div>
-      <ul>
-        <li>A billionaire puppet — Palantir and Peter Thiel-linked money dominates his donor base<sup class="cite">[17]</sup></li>
-        <li>Abandoned the city council, then the mayor's office — a repeated stepping-stone pattern<sup class="cite">[8]</sup></li>
-        <li>Polling in single digits despite $12M raised and a Super Bowl ad<sup class="cite">[1]</sup></li>
-        <li>Dubious $35M escrow fundraising scheme drew campaign finance scrutiny<sup class="cite">[16]</sup></li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block det">
-      <div class="voice-label det">Detractors say</div>
-      <ul>
-        <li>Took Chevron money; had a public affair in office; lost 2018 with stronger name ID<sup class="cite">[10]</sup></li>
-        <li>Teachers unions will never support him — a key Democratic constituency written off</li>
-        <li>At 2% with the state party asking him to step aside<sup class="cite">[18]</sup></li>
-        <li>Continued presence risks handing the governorship to a Republican</li>
-      </ul>
-    </div>
-  </td>
-
-  <td class="dem-cell">
-    <div class="voice-block det">
-      <div class="voice-label det">Detractors say</div>
-      <ul>
-        <li>At 2% with no realistic path — continuing is a vanity project<sup class="cite">[1]</sup></li>
-        <li>CA schools have persistent outcome gaps despite years of his advocacy<sup class="cite">[11]</sup></li>
-        <li>Continued presence fragments the Democratic vote and risks a Republican governor<sup class="cite">[18]</sup></li>
-      </ul>
-    </div>
-  </td>
-</tr>
-
-</tbody>
+<table class="grid" id="mainTable">
+<thead><tr id="tableHead"><th class="row-label"></th></tr></thead>
+<tbody id="tableBody"></tbody>
 </table>
 </div>
 
-<!-- ════════════════ SOURCES ════════════════ -->
+<!-- SOURCES -->
 <div class="sources-wrap">
   <h3>Sources &amp; Citations</h3>
   <div class="source-grid">
-    <div class="source-item"><span class="source-num">[1]</span><div><span class="source-title">California 2026 Primary Poll</span> · <span class="source-pub">Emerson College Polling / Nexstar Media Group</span> · <span class="source-date">April 22, 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[2]</span><div><span class="source-title">How Much Money Has Each 2026 Candidate Raised?</span> · <span class="source-pub">KRON4 / CA Secretary of State filings</span> · <span class="source-date">April 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[3]</span><div><span class="source-title">Tom Steyer Profile: Campaign, Donor, Activist</span> · <span class="source-pub">Factually.co</span> · <span class="source-date">April 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[4]</span><div><span class="source-title">Progressive Group Founded by Bernie Sanders Endorses Billionaire for California Governor</span> · <span class="source-pub">The Intercept</span> · <span class="source-date">April 20, 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[5]</span><div><span class="source-title">Build, Protect, and Lead California (official campaign site)</span> · <span class="source-pub">xavierbecerra2026.com</span></div></div>
-    <div class="source-item"><span class="source-num">[6]</span><div><span class="source-title">Katie Porter — Wikipedia</span> · <span class="source-pub">Wikipedia</span> · <span class="source-date">Retrieved April 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[7]</span><div><span class="source-title">Katie Porter for Governor — Official Campaign Website</span> · <span class="source-pub">katieporter.com</span></div></div>
-    <div class="source-item"><span class="source-num">[8]</span><div><span class="source-title">Matt Mahan — Wikipedia; San José Spotlight coverage</span> · <span class="source-pub">Wikipedia / San José Spotlight</span> · <span class="source-date">Retrieved April 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[9]</span><div><span class="source-title">Who Is Matt Mahan, the California Governor Hopeful Backed by Tech Billionaires?</span> · <span class="source-pub">Spear's WMS</span> · <span class="source-date">February 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[10]</span><div><span class="source-title">Antonio Villaraigosa candidate profile</span> · <span class="source-pub">ABC7 Los Angeles / CalMatters</span></div></div>
-    <div class="source-item"><span class="source-num">[11]</span><div><span class="source-title">California schools superintendent Tony Thurmond joins the race for governor</span> · <span class="source-pub">CalMatters</span></div></div>
-    <div class="source-item"><span class="source-num">[12]</span><div><span class="source-title">PG&E Launches $10 Million PAC to Take Out Tom Steyer</span> · <span class="source-pub">SF Standard</span> · <span class="source-date">April 23, 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[13]</span><div><span class="source-title">Rivals Target Steyer, Becerra in Debate as Race Tightens</span> · <span class="source-pub">KQED</span> · <span class="source-date">April 22, 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[14]</span><div><span class="source-title">Xavier Becerra's Past Failures Threaten to Derail His Governor Bid</span> · <span class="source-pub">Factually.co; Washington Post reporting on HHS failures</span></div></div>
-    <div class="source-item"><span class="source-num">[15]</span><div><span class="source-title">Katie Porter Staffers Vouch for Boss After Videos Raise Temperament Concerns</span> · <span class="source-pub">Washington Post</span> · <span class="source-date">April 21, 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[16]</span><div><span class="source-title">Is Matt Mahan's Campaign for California Governor Losing Steam?</span> · <span class="source-pub">San José Spotlight</span> · <span class="source-date">April 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[17]</span><div><span class="source-title">Why Billionaire Techies Are Betting Big on Matt Mahan's California Governor Run</span> · <span class="source-pub">Local News Matters</span> · <span class="source-date">February 14, 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[18]</span><div><span class="source-title">The Field Is Set: Meet the Candidates Running for California Governor</span> · <span class="source-pub">CalMatters</span> · <span class="source-date">March 7, 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[19]</span><div><span class="source-title">Steve Hilton — Wikipedia</span> · <span class="source-pub">Wikipedia</span> · <span class="source-date">Retrieved April 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[20]</span><div><span class="source-title">Meet Steve Hilton, the Former U.K. Political Strategist Trump Is Endorsing for California Governor</span> · <span class="source-pub">TIME Magazine</span> · <span class="source-date">April 6, 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[21]</span><div><span class="source-title">Chad Bianco — Wikipedia; Riverside County Sheriff official biography</span> · <span class="source-pub">Wikipedia / riversidesheriff.org</span> · <span class="source-date">Retrieved April 2026</span></div></div>
-    <div class="source-item"><span class="source-num">[22]</span><div><span class="source-title">The Sheriff With California's Worst Crime-Solving Record Is Running for Governor</span> · <span class="source-pub">Center on Juvenile and Criminal Justice (CJCJ)</span> · <span class="source-date">August 2025</span></div></div>
+    <div class="source-item"><span class="source-num">[1]</span><div><a class="source-title" href="https://www.cbsnews.com/news/california-governors-race-primary-voters-opinion-poll-2026-04-27/" target="_blank" rel="noopener">California Governor's Race: Primary Voters Opinion Poll</a> · <span class="source-pub">CBS News / YouGov</span> · <span class="source-date">April 23–27, 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[2]</span><div><a class="source-title" href="https://www.yourcentralvalley.com/news/california/california-politics/how-much-money-has-each-2026-candidate-for-california-governor-raised/" target="_blank" rel="noopener">How Much Money Has Each 2026 Candidate Raised?</a> · <span class="source-pub">KRON4 / CA Secretary of State filings</span> · <span class="source-date">April 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[3]</span><div><a class="source-title" href="https://en.wikipedia.org/wiki/Tom_Steyer" target="_blank" rel="noopener">Tom Steyer — Wikipedia</a> · <span class="source-pub">Wikipedia</span> · <span class="source-date">Retrieved April 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[4]</span><div><a class="source-title" href="https://theintercept.com/2026/04/20/our-revolution-tom-steyer-california-governor/" target="_blank" rel="noopener">Progressive Group Founded by Bernie Sanders Endorses Billionaire for California Governor</a> · <span class="source-pub">The Intercept</span> · <span class="source-date">April 20, 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[5]</span><div><a class="source-title" href="https://www.xavierbecerra2026.com" target="_blank" rel="noopener">Build, Protect, and Lead California (official campaign site)</a> · <span class="source-pub">xavierbecerra2026.com</span></div></div>
+    <div class="source-item"><span class="source-num">[6]</span><div><a class="source-title" href="https://en.wikipedia.org/wiki/Katie_Porter" target="_blank" rel="noopener">Katie Porter — Wikipedia</a> · <span class="source-pub">Wikipedia</span> · <span class="source-date">Retrieved April 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[7]</span><div><a class="source-title" href="https://www.katieporter.com" target="_blank" rel="noopener">Katie Porter for Governor — Official Campaign Website</a> · <span class="source-pub">katieporter.com</span></div></div>
+    <div class="source-item"><span class="source-num">[8]</span><div><a class="source-title" href="https://en.wikipedia.org/wiki/Matt_Mahan" target="_blank" rel="noopener">Matt Mahan — Wikipedia</a> · <span class="source-pub">Wikipedia / San José Spotlight</span> · <span class="source-date">Retrieved April 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[9]</span><div><a class="source-title" href="https://localnewsmatters.org/2026/02/14/why-billionaire-techies-are-betting-big-on-matt-mahans-california-governor-run/" target="_blank" rel="noopener">Why Billionaire Techies Are Betting Big on Matt Mahan's California Governor Run</a> · <span class="source-pub">Local News Matters</span> · <span class="source-date">February 14, 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[10]</span><div><a class="source-title" href="https://en.wikipedia.org/wiki/Antonio_Villaraigosa" target="_blank" rel="noopener">Antonio Villaraigosa — Wikipedia</a> · <span class="source-pub">Wikipedia</span> · <span class="source-date">Retrieved April 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[11]</span><div><a class="source-title" href="https://calmatters.org/politics/2023/11/tony-thurmond-governor-california/" target="_blank" rel="noopener">California schools superintendent Tony Thurmond joins the race for governor</a> · <span class="source-pub">CalMatters</span></div></div>
+    <div class="source-item"><span class="source-num">[12]</span><div><a class="source-title" href="https://sfstandard.com/2026/04/23/pge-pac-tom-steyer-california-governor/" target="_blank" rel="noopener">PG&amp;E Launches $10 Million PAC to Take Out Tom Steyer</a> · <span class="source-pub">SF Standard</span> · <span class="source-date">April 23, 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[13]</span><div><a class="source-title" href="https://www.kqed.org/news/11997000/california-governor-debate-2026" target="_blank" rel="noopener">Rivals Target Steyer, Becerra in Debate as Race Tightens</a> · <span class="source-pub">KQED</span> · <span class="source-date">April 22, 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[14]</span><div><a class="source-title" href="https://www.washingtonpost.com/immigration/2021/05/26/child-migrants-hhs-lost-contact/" target="_blank" rel="noopener">Thousands of Migrant Children Lost by HHS — Washington Post Investigation</a> · <span class="source-pub">Washington Post</span> · <span class="source-date">May 2021</span></div></div>
+    <div class="source-item"><span class="source-num">[15]</span><div><a class="source-title" href="https://www.washingtonpost.com/politics/2026/04/21/katie-porter-staffers-temperament/" target="_blank" rel="noopener">Katie Porter Staffers Vouch for Boss After Videos Raise Temperament Concerns</a> · <span class="source-pub">Washington Post</span> · <span class="source-date">April 21, 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[16]</span><div><a class="source-title" href="https://sanjosespotlight.com/is-matt-mahans-campaign-for-california-governor-losing-steam/" target="_blank" rel="noopener">Is Matt Mahan's Campaign for California Governor Losing Steam?</a> · <span class="source-pub">San José Spotlight</span> · <span class="source-date">April 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[17]</span><div><a class="source-title" href="https://localnewsmatters.org/2026/02/14/why-billionaire-techies-are-betting-big-on-matt-mahans-california-governor-run/" target="_blank" rel="noopener">Why Billionaire Techies Are Betting Big on Matt Mahan's California Governor Run</a> · <span class="source-pub">Local News Matters</span> · <span class="source-date">February 14, 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[18]</span><div><a class="source-title" href="https://calmatters.org/politics/2026/03/california-governor-race-candidates-2026/" target="_blank" rel="noopener">The Field Is Set: Meet the Candidates Running for California Governor</a> · <span class="source-pub">CalMatters</span> · <span class="source-date">March 7, 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[19]</span><div><a class="source-title" href="https://en.wikipedia.org/wiki/Steve_Hilton" target="_blank" rel="noopener">Steve Hilton — Wikipedia</a> · <span class="source-pub">Wikipedia</span> · <span class="source-date">Retrieved April 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[20]</span><div><a class="source-title" href="https://time.com/7271000/steve-hilton-trump-california-governor-2026/" target="_blank" rel="noopener">Meet Steve Hilton, the Former U.K. Political Strategist Trump Is Endorsing for California Governor</a> · <span class="source-pub">TIME Magazine</span> · <span class="source-date">April 6, 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[21]</span><div><a class="source-title" href="https://en.wikipedia.org/wiki/Chad_Bianco" target="_blank" rel="noopener">Chad Bianco — Wikipedia</a> · <span class="source-pub">Wikipedia</span> · <span class="source-date">Retrieved April 2026</span></div></div>
+    <div class="source-item"><span class="source-num">[22]</span><div><a class="source-title" href="https://www.cjcj.org/research-articles/the-sheriff-with-californias-worst-crime-solving-record-is-running-for-governor" target="_blank" rel="noopener">The Sheriff With California's Worst Crime-Solving Record Is Running for Governor</a> · <span class="source-pub">Center on Juvenile and Criminal Justice (CJCJ)</span> · <span class="source-date">August 2025</span></div></div>
   </div>
 </div>
 
 <div class="footnote-bar">
-  ⚠ flags indicate donors with potential tension against the candidate's stated platform. Track record icons: ✓ record supports platform · ~ mixed / partial · ✗ record contradicts platform. Polling: Emerson College Polling / Nexstar (Apr 22, 2026) [1]. Fundraising: CA Secretary of State filings (April 2026) [2]. Column order reflects overall primary polling rank (#1–#8). Headshots are official or widely published public domain photos sourced from Wikipedia Commons.
+  ⚠ flags indicate donors with potential tension against the candidate's stated platform. Track record icons: ✓ record supports platform · ~ mixed / partial · ✗ record contradicts platform. Polling: Emerson College Polling / Nexstar (Apr 22, 2026) [1]. Fundraising: CA Secretary of State filings (April 2026) [2]. Column order reflects overall primary polling rank. Headshots hosted locally in images/ folder.
 </div>
+
+<!-- ══════════════════════════════════════════════════════
+     ALL CANDIDATE CONTENT
+     Each candidate's rows are defined here as a JS object.
+     The table is built and sorted dynamically.
+     ══════════════════════════════════════════════════════ -->
+<script>
+const CONTENT = {
+
+  hilton: {
+    background: `<ul class="bl">
+      <li>Born 1969, London; son of Hungarian refugees who fled the 1956 Soviet invasion — family anglicised surname from Hircsák to Hilton<sup class="cite">[19]</sup></li>
+      <li>Father was Hungary's national ice hockey team goalkeeper; family worked catering at Heathrow after arriving penniless; parents divorced when Steve was 5<sup class="cite">[19]</sup></li>
+      <li>Won bursary to Christ's Hospital boarding school; Oxford PPE degree<sup class="cite">[19]</sup></li>
+      <li>Senior strategy adviser to UK PM David Cameron at 10 Downing Street (2010–12)<sup class="cite">[20]</sup></li>
+      <li>Married to Rachel Whetstone (Chief Communications Officer, Netflix) since 2008; two sons<sup class="cite">[19]</sup></li>
+      <li>Moved to California in 2012; became U.S. citizen 2021; lives in Atherton, Silicon Valley; taught at Stanford's d.school<sup class="cite">[20]</sup></li>
+    </ul>`,
+    platform: `<ul class="bl">
+      <li>"Califordable": $3 gas, cut electric bills in half, first $100K income tax-free<sup class="cite">[20]</sup></li>
+      <li>7.5% flat income tax over $100K; no property tax increases<sup class="cite">[20]</sup></li>
+      <li>Strip housing regulations; cap developer fees; expand development outside cities<sup class="cite">[20]</sup></li>
+      <li>Grade/reward teachers; fire lowest performers; expand charter schools<sup class="cite">[20]</sup></li>
+      <li>Crack down on homelessness, crime, drugs, illegal immigration<sup class="cite">[20]</sup></li>
+      <li>Work cooperatively with Trump; end Sacramento "one-party rule"<sup class="cite">[20]</sup></li>
+    </ul>`,
+    record: `
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">Founded Golden Together (2023) — bipartisan nonprofit on housing and homelessness before launching candidacy<sup class="cite">[20]</sup></span><span class="ti-link">✦ Backs governance reform platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">Never held elected office — only experience is advising Cameron in the UK and hosting Fox News; no government accountability record<sup class="cite">[19]</sup></span><span class="ti-link">✦ Undercuts executive competence claims</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body"><span class="ti-text">Lives in Atherton (one of CA's wealthiest zip codes) while running on "Califordable" for working families</span><span class="ti-link">✦ Mixed credibility on affordability platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body"><span class="ti-text">Launched campaign as "nonpartisan"; quickly embraced Trump's endorsement — raises questions about consistency<sup class="cite">[20]</sup></span><span class="ti-link">✦ Complicates crossover voter appeal</span></div></div>`,
+    donors: `<p class="donor-total">$7.1M <sup class="cite">[2]</sup></p>
+      <p class="donor-note-sm">18,000+ individual contributions — broad small-donor base for a Republican</p>
+      <div class="chips"><span class="chip">Lighthouse Worldwide Solutions Inc.</span><span class="chip">Silicon Valley tech-aligned individuals</span></div>
+      <p class="donor-note-sm">Wife Rachel Whetstone (Netflix CCO) brings significant tech industry connectivity</p>`,
+    endorsements: `
+      <div class="end-item">President Donald Trump (Apr 6, 2026)<sup class="cite">[20]</sup></div>
+      <div class="end-item">Vivek Ramaswamy (2024 GOP presidential candidate)</div>
+      <div class="end-item">Gloria Romero (running mate, Lt. Gov. race)</div>`,
+    opposition: `
+      <div class="end-item opp">All Democratic candidates oppose him as Trump-aligned</div>
+      <div class="end-item opp">Got only 44% of CA Republican delegate votes vs. Bianco's 49% at GOP convention — neither reached 60% threshold</div>
+      <div class="end-item opp">Critics: wasn't a U.S. citizen until 2021 — authenticity questions for someone claiming to "fix California"</div>`,
+    supporters: `<div class="voice-block sup"><div class="voice-label sup">Supporters say</div><ul>
+      <li>His origin story — son of Hungarian refugees on UK welfare — gives authentic credibility on opportunity and freedom<sup class="cite">[19]</sup></li>
+      <li>Only candidate with both Silicon Valley smarts and Trump's backing — a winning coalition<sup class="cite">[20]</sup></li>
+      <li>"Positive populism" offers practical solutions, not just conservative grievance politics<sup class="cite">[20]</sup></li>
+      <li>Trump endorsement consolidates Republican voters and gives Democrats a real general election threat<sup class="cite">[20]</sup></li>
+    </ul></div>`,
+    detractors: `<div class="voice-block det"><div class="voice-label det">Detractors say</div><ul>
+      <li>Wasn't a U.S. citizen until 2021 — a British man who became American specifically to run for governor<sup class="cite">[19]</sup></li>
+      <li>Never held elected office; only "executive" experience is advising David Cameron and hosting Fox News<sup class="cite">[19]</sup></li>
+      <li>Lives in Atherton (one of CA's wealthiest zip codes) while running on working-family affordability</li>
+      <li>Pivoted from "nonpartisan" to Trump-endorsed in 12 months — opportunism over principle<sup class="cite">[20]</sup></li>
+    </ul></div>`,
+  },
+
+  bianco: {
+    background: `<ul class="bl">
+      <li>Born Oct 9, 1967, Hill Air Force Base, Utah; eldest of three sons; grew up in a small mining town<sup class="cite">[21]</sup></li>
+      <li>Moved to California 1989; graduated top of class, San Bernardino Sheriff's Academy (1993); 32-year Riverside County career<sup class="cite">[21]</sup></li>
+      <li>Married to Denise Bianco; four adult children; four grandchildren; lives in Woodcrest, Riverside<sup class="cite">[21]</sup></li>
+      <li>Active member of Sandals Church, Riverside — faith and family central to public identity<sup class="cite">[21]</sup></li>
+      <li>Affiliated with Constitutional Sheriffs and Peace Officers Association (CSPOA)<sup class="cite">[22]</sup></li>
+      <li>Former Oath Keepers member (paid $40 in 2014, says he did not renew) — exposed in 2021 data breach<sup class="cite">[21]</sup></li>
+    </ul>`,
+    platform: `<ul class="bl">
+      <li>Public safety as top priority; fully fund and staff law enforcement<sup class="cite">[22]</sup></li>
+      <li>Enforce encampment clearances; expand drug/alcohol treatment<sup class="cite">[22]</sup></li>
+      <li>Eliminate CEQA; expedite housing approvals<sup class="cite">[22]</sup></li>
+      <li>Reduce taxes for working families; halt overregulation<sup class="cite">[22]</sup></li>
+      <li>Election integrity; "constitutional sheriff" philosophy — local authority above state<sup class="cite">[22]</sup></li>
+    </ul>`,
+    record: `
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">Re-elected as Riverside County Sheriff in 2022 with ~60% of vote — genuine community support<sup class="cite">[21]</sup></span><span class="ti-link">✦ Backs public safety platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">Riverside Sheriff ranks dead last (57th of 57 CA sheriffs) in crime clearance — only 9.2% of major crimes solved, less than half the state average<sup class="cite">[22]</sup></span><span class="ti-link">✦ Directly contradicts law-and-order platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">2022: 18 inmate deaths in Riverside jails — highest in 15 years; CA DOJ launched unconstitutional policing investigation<sup class="cite">[21]</sup></span><span class="ti-link">✦ Undercuts public safety platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">Ordered seizure of 650,000 ballots (Apr 2026) citing fraud — CA Supreme Court ordered warrants unsealed; affidavits revealed claims came solely from a citizen activist group<sup class="cite">[21]</sup></span><span class="ti-link">✦ Undercuts election integrity platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body"><span class="ti-text">Knelt with BLM protesters in 2020; called same protests "destructive riots" in 2023<sup class="cite">[21]</sup></span><span class="ti-link">✦ Mixed — credibility gap on consistency</span></div></div>`,
+    donors: `<p class="donor-total">Lowest major-candidate fundraising <sup class="cite">[2]</sup></p>
+      <p class="donor-note-sm">Reliant on small-donor base and law enforcement community</p>
+      <div class="chips"><span class="chip">Peace Officers Research Assoc. of CA</span><span class="chip">Law enforcement PACs</span><span class="chip">Claremont Institute<sup class="cite">[21]</sup></span></div>
+      <p class="donor-note-sm">Running 7-figure TV ad blitz despite smaller fundraising base<sup class="cite">[22]</sup></p>`,
+    endorsements: `
+      <div class="end-item">CA Republican Assembly<sup class="cite">[22]</sup></div>
+      <div class="end-item">Peace Officers Research Assoc. of CA</div>
+      <div class="end-item">Assemblymembers Greg Wallis &amp; Laurie Davies</div>
+      <div class="end-item">SF Sheriff Paul Miyamoto</div>
+      <div class="end-item">Claremont Institute (2023 Sheriff Award)<sup class="cite">[21]</sup></div>`,
+    opposition: `
+      <div class="end-item opp">CA Dept. of Justice (launched unconstitutional policing investigation)<sup class="cite">[21]</sup></div>
+      <div class="end-item opp">CA Supreme Court (ordered ballot seizure warrants unsealed)<sup class="cite">[21]</sup></div>
+      <div class="end-item opp">Center on Juvenile &amp; Criminal Justice (damning crime clearance data)<sup class="cite">[22]</sup></div>
+      <div class="end-item opp">Active civil rights lawsuits over jail deaths<sup class="cite">[21]</sup></div>
+      <div class="end-item opp">Trump's endorsement of Hilton over Bianco — significant blow<sup class="cite">[20]</sup></div>`,
+    supporters: `<div class="voice-block sup"><div class="voice-label sup">Supporters say</div><ul>
+      <li>A real law enforcement officer with 32 years on the job — not a politician or TV host<sup class="cite">[21]</sup></li>
+      <li>Re-elected with 60% of the vote — genuine community trust, not manufactured support<sup class="cite">[21]</sup></li>
+      <li>Stood up to state COVID mandates; faith and family story resonates with communities Sacramento ignores</li>
+    </ul></div>`,
+    detractors: `<div class="voice-block det"><div class="voice-label det">Detractors say</div><ul>
+      <li>His department ranks dead last among all 57 CA sheriffs in crime clearance — the worst possible track record for a "law and order" candidate<sup class="cite">[22]</sup></li>
+      <li>18 inmate deaths in one year; the state launched a formal unconstitutional policing investigation<sup class="cite">[21]</sup></li>
+      <li>Ballot seizure was based entirely on a citizen activist group's claims — courts called it baseless<sup class="cite">[21]</sup></li>
+      <li>Former Oath Keepers membership and "constitutional sheriff" ideology place him outside California's mainstream<sup class="cite">[22]</sup></li>
+    </ul></div>`,
+  },
+
+  steyer: {
+    background: `<ul class="bl">
+      <li>Born 1957, NYC; Yale BA, Stanford MBA<sup class="cite">[3]</sup></li>
+      <li>Founded Farallon Capital (1986); ~$2.4B fortune<sup class="cite">[3]</sup></li>
+      <li>Married to philanthropist Kat Taylor; four adult children; co-founded TomKat Ranch and climate foundations<sup class="cite">[3]</sup></li>
+      <li>Spent $300M+ on 2020 presidential run; founded NextGen Climate<sup class="cite">[4]</sup></li>
+      <li>No formal religious affiliation; describes environmental and spiritual values</li>
+    </ul>`,
+    platform: `<ul class="bl">
+      <li>Single-payer healthcare<sup class="cite">[4]</sup></li>
+      <li>Wealth tax on billionaires (including himself)<sup class="cite">[4]</sup></li>
+      <li>Reform PG&amp;E; overhaul CPUC utility regulation<sup class="cite">[12]</sup></li>
+      <li>Prop 13 reform; 100% clean energy</li>
+      <li>Stand up to Trump and federal overreach</li>
+    </ul>`,
+    record: `
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">Spent hundreds of millions via NextGen Climate on clean energy ballot measures for 15+ years<sup class="cite">[3]</sup></span><span class="ti-link">✦ Backs climate platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">Supports CA Billionaire Tax that would hit himself; says "people like me should pay more"<sup class="cite">[4]</sup></span><span class="ti-link">✦ Backs wealth tax platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">Farallon Capital invested in private prisons and fossil fuels — directly contradicts his platforms<sup class="cite">[3]</sup></span><span class="ti-link">✦ Undercuts climate + anti-corporate platforms</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body"><span class="ti-text">$120M self-funded ad blitz fuels "buying the election" narrative — tension with anti-oligarch messaging<sup class="cite">[12]</sup></span><span class="ti-link">✦ Mixed signal on anti-corporate platform</span></div></div>`,
+    donors: `<p class="donor-total">$122.7M <sup class="cite">[2]</sup></p>
+      <p class="donor-note-sm">99%+ self-funded ($122.5M of own money)</p>
+      <div class="chips"><span class="chip">Self (Farallon Capital fortune)</span></div>
+      <p class="warn-note">⚠ PG&amp;E, real estate groups &amp; prison guard unions funded a $10M anti-Steyer PAC<sup class="cite">[12]</sup></p>`,
+    endorsements: `
+      <div class="end-item">Our Revolution (Bernie Sanders org)<sup class="cite">[4]</sup></div>
+      <div class="end-item">Former Senate Pres. Pro Tem Toni Atkins</div>
+      <div class="end-item">Several CA Assembly members (post-Swalwell)</div>`,
+    opposition: `
+      <div class="end-item opp">PG&amp;E ($10M anti-Steyer PAC)<sup class="cite">[12]</sup></div>
+      <div class="end-item opp">CA real estate and construction industry (PAC funding)</div>
+      <div class="end-item opp">Prison guard union (CA Correctional Peace Officers Assoc.)</div>
+      <div class="end-item opp">Porter and Mahan attack him by name on fossil fuel/prison investments</div>`,
+    supporters: `<div class="voice-block sup"><div class="voice-label sup">Supporters say</div><ul>
+      <li>The entities funding attack ads against him prove he's the real threat to the corporate status quo<sup class="cite">[4]</sup></li>
+      <li>15+ years of climate activism are real — he built NextGen from scratch<sup class="cite">[3]</sup></li>
+      <li>He's willing to tax himself — that takes genuine conviction<sup class="cite">[4]</sup></li>
+      <li>No executive office means no record of Sacramento compromise</li>
+    </ul></div>`,
+    detractors: `<div class="voice-block det"><div class="voice-label det">Detractors say</div><ul>
+      <li>Made his billions off the same fossil fuel and private prison industries he now claims to oppose<sup class="cite">[3]</sup></li>
+      <li>Our Revolution endorsing a billionaire is the height of progressive hypocrisy<sup class="cite">[4]</sup></li>
+      <li>$120M in self-funded ads is buying name recognition, not earning it<sup class="cite">[12]</sup></li>
+      <li>Never held elected office — no executive accountability record</li>
+    </ul></div>`,
+  },
+
+  becerra: {
+    background: `<ul class="bl">
+      <li>Born 1958, Sacramento; parents were Mexican immigrants; Stanford BA, UCLA Law<sup class="cite">[5]</sup></li>
+      <li>Married to Dr. Carolina Reyes, a high-risk OB-GYN — frequently cited in his healthcare platform<sup class="cite">[5]</sup></li>
+      <li>Catholic; first Latino CA AG and first Latino HHS Secretary<sup class="cite">[5]</sup></li>
+      <li>Surged from 4% → 13% in polls after Swalwell's exit<sup class="cite">[1]</sup></li>
+    </ul>`,
+    platform: `<ul class="bl">
+      <li>Lower drug costs; protect and expand ACA<sup class="cite">[5]</sup></li>
+      <li>Build affordable housing; protect renters</li>
+      <li>Lower statewide cost of living</li>
+      <li>Defend CA against Trump on immigration, healthcare, rights</li>
+      <li>Disaster preparedness with equity focus</li>
+    </ul>`,
+    record: `
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">As HHS Sec., expanded coverage to 24M+ Americans; negotiated Medicare drug-price reductions<sup class="cite">[5]</sup></span><span class="ti-link">✦ Backs healthcare platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">Filed 122 suits vs. Trump as CA AG on immigration, ACA, environment, and reproductive rights<sup class="cite">[5]</sup></span><span class="ti-link">✦ Backs "beat Trump" platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">85,000+ migrant children lost from federal tracking at HHS; NYT documented systemic failures<sup class="cite">[14]</sup></span><span class="ti-link">✦ Undercuts equity + care platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">Former chief of staff pleaded guilty to wire/bank fraud involving a Becerra campaign account<sup class="cite">[14]</sup></span><span class="ti-link">✦ Undercuts clean governance claims</span></div></div>`,
+    donors: `<p class="donor-total">$2.9M <sup class="cite">[2]</sup></p>
+      <p class="donor-note-sm">2,885 contributions — smallest war chest among top Dems</p>
+      <div class="chips"><span class="chip chip-warn">⚠ Chevron</span></div>
+      <p class="warn-note">⚠ Chevron donation notable for a candidate running against corporate power<sup class="cite">[2]</sup></p>`,
+    endorsements: `
+      <div class="end-item">Wave of former Swalwell supporters<sup class="cite">[1]</sup></div>
+      <div class="end-item">Growing CA Assembly member coalition</div>
+      <div class="end-item">CA Democratic establishment consolidation pick</div>`,
+    opposition: `
+      <div class="end-item opp">Villaraigosa — launched attack websites on Becerra's record<sup class="cite">[14]</sup></div>
+      <div class="end-item opp">Mahan calls him "a D.C. insider the establishment is rallying around"<sup class="cite">[13]</sup></div>
+      <div class="end-item opp">Critics cite migrant children failures and fraud scandal around former staff<sup class="cite">[14]</sup></div>`,
+    supporters: `<div class="voice-block sup"><div class="voice-label sup">Supporters say</div><ul>
+      <li>The steadiest hand after Swalwell's chaos — dependable and trustworthy<sup class="cite">[1]</sup></li>
+      <li>He's actually beaten Trump in court 122 times — a real record, not a promise<sup class="cite">[5]</sup></li>
+      <li>HHS tenure expanded coverage to millions against fierce opposition</li>
+      <li>First Latino in multiple top offices — a meaningful representation milestone</li>
+    </ul></div>`,
+    detractors: `<div class="voice-block det"><div class="voice-label det">Detractors say</div><ul>
+      <li>Largely invisible during COVID when it mattered — reportedly reprimanded by White House for slow responses<sup class="cite">[14]</sup></li>
+      <li>85,000 migrant children were lost from federal tracking on his watch<sup class="cite">[14]</sup></li>
+      <li>Former chief of staff convicted of fraud involving his own campaign account<sup class="cite">[14]</sup></li>
+      <li>Took Chevron money — hard to square with "fighting for the people"<sup class="cite">[2]</sup></li>
+    </ul></div>`,
+  },
+
+  porter: {
+    background: `<ul class="bl">
+      <li>Born 1974, Fort Dodge, Iowa; grew up on a farm; Yale BA, Harvard Law<sup class="cite">[6]</sup></li>
+      <li>Single mother of three; cites parenting as central to her cost-of-living platform<sup class="cite">[7]</sup></li>
+      <li>Interned for Sen. Chuck Grassley (R-IA) as an undergrad; UC Irvine consumer law professor before politics<sup class="cite">[6]</sup></li>
+      <li>No formal religious affiliation publicly stated</li>
+    </ul>`,
+    platform: `<ul class="bl">
+      <li>Consumer protection — fight Big Pharma and insurers<sup class="cite">[7]</sup></li>
+      <li>No corporate or PAC donations — ever<sup class="cite">[7]</sup></li>
+      <li>Lower cost of living; fight tariff impacts</li>
+      <li>Transit-oriented housing; expand Section 8<sup class="cite">[6]</sup></li>
+      <li>100% renewable energy; protect reproductive rights</li>
+    </ul>`,
+    record: `
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">Has never accepted corporate or PAC money — consistent across entire House career<sup class="cite">[7]</sup></span><span class="ti-link">✦ Directly matches no-corporate-money platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">Held corporate execs accountable in high-profile congressional hearings on pharma and banking<sup class="cite">[6]</sup></span><span class="ti-link">✦ Backs consumer protection platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">Lost 2024 Senate primary to Schiff — statewide electability remains unproven<sup class="cite">[6]</sup></span><span class="ti-link">✦ Undercuts "can win" narrative</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body"><span class="ti-text">Staff-berating videos and CBS interview walkout raised temperament concerns; 30 ex-staffers vouched for her<sup class="cite">[15]</sup></span><span class="ti-link">✦ Mixed — fueled electability questions</span></div></div>`,
+    donors: `<p class="donor-total">$6.2M <sup class="cite">[2]</sup></p>
+      <p class="donor-note-sm">48,000+ contributors; avg. donation ~$38 — most individual donors in race</p>
+      <div class="chips"><span class="chip">Nat'l Union Hospital &amp; Healthcare Employees</span><span class="chip">CWA District 9</span><span class="chip">Emily's List</span><span class="chip">End Citizens United</span></div>
+      <p class="ok-note">✓ Refuses corporate and PAC money — fully consistent with platform<sup class="cite">[7]</sup></p>`,
+    endorsements: `
+      <div class="end-item">Sen. Elizabeth Warren<sup class="cite">[7]</sup></div>
+      <div class="end-item">Emily's List · End Citizens United</div>
+      <div class="end-item">CWA District 9 · CA Federation of Labor (co-endorsement)</div>
+      <div class="end-item">Rep. Robert Garcia</div>`,
+    opposition: `
+      <div class="end-item opp">Our Revolution (backed Steyer over Porter)<sup class="cite">[4]</sup></div>
+      <div class="end-item opp">Multiple opponents citing temperament videos<sup class="cite">[15]</sup></div>
+      <div class="end-item opp">Former Swalwell endorsers who moved to Becerra rather than Porter</div>`,
+    supporters: `<div class="voice-block sup"><div class="voice-label sup">Supporters say</div><ul>
+      <li>The only candidate who has never taken a dollar from corporations — ever<sup class="cite">[7]</sup></li>
+      <li>Has the most organized labor support of any Democrat in the race<sup class="cite">[7]</sup></li>
+      <li>Her whiteboard record is the longest and most consistent progressive record in the field</li>
+      <li>As a single mom she uniquely understands the cost-of-living pressures families face</li>
+    </ul></div>`,
+    detractors: `<div class="voice-block det"><div class="voice-label det">Detractors say</div><ul>
+      <li>Already lost one statewide race to Schiff — electability at scale is unproven<sup class="cite">[6]</sup></li>
+      <li>Staff-berating videos and CBS walkout are disqualifying for someone running a $300B state budget<sup class="cite">[15]</sup></li>
+      <li>"Whiteboard warrior" brand doesn't translate to executive leadership</li>
+      <li>Dropped from 18% to 10% for a reason — momentum stalled at a critical moment<sup class="cite">[1]</sup></li>
+    </ul></div>`,
+  },
+
+  mahan: {
+    background: `<ul class="bl">
+      <li>Born 1982; grew up working-class in Watsonville, CA; father a letter carrier, mother a schoolteacher<sup class="cite">[8]</sup></li>
+      <li>Harvard grad (magna cum laude, 2005); raised Catholic; attended Bellarmine Prep on a low-income scholarship<sup class="cite">[8]</sup></li>
+      <li>Married to Silvia-Wedad Scandar (met at Harvard); two children; lives in San Jose's Almaden Valley<sup class="cite">[8]</sup></li>
+      <li>Co-founded Brigade Media (civic tech) before entering politics</li>
+    </ul>`,
+    platform: `<ul class="bl">
+      <li>Homelessness: shelter-or-leave enforcement<sup class="cite">[8]</sup></li>
+      <li>Suspend state gas tax for working families<sup class="cite">[13]</sup></li>
+      <li>Cut government waste; Sacramento accountability</li>
+      <li>Law enforcement support; backed Prop 36<sup class="cite">[8]</sup></li>
+      <li>Break with progressive establishment</li>
+    </ul>`,
+    record: `
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">Claims ~33% reduction in street homelessness in San Jose; built tiny home villages and shelter capacity<sup class="cite">[8]</sup></span><span class="ti-link">✦ Backs homelessness platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">Redirected voter-approved Measure E affordable housing funds toward temporary shelter<sup class="cite">[8]</sup></span><span class="ti-link">✦ Undercuts long-term housing claims</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">Left City Council mid-term for mayor's race; now leaving mayor's office for governor — repeated stepping-stone pattern<sup class="cite">[8]</sup></span><span class="ti-link">✦ Undercuts accountability platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body"><span class="ti-text">Top strategist departed mid-race; $35M escrow fundraising scheme drew campaign finance scrutiny<sup class="cite">[16]</sup></span><span class="ti-link">✦ Complicates "clean government" message</span></div></div>`,
+    donors: `<p class="donor-total">$12.7M <sup class="cite">[2]</sup></p>
+      <p class="donor-note-sm">Only 615 contributions — nearly all maxed-out billionaires ($78,400 each)</p>
+      <div class="chips"><span class="chip chip-warn">⚠ Sergey Brin (Google co-founder)</span><span class="chip chip-warn">⚠ Joe Lonsdale (Palantir co-founder)</span><span class="chip chip-warn">⚠ Garry Tan (YCombinator CEO)</span><span class="chip">David Baszucki (Roblox CEO)</span><span class="chip">Rick Caruso</span></div>
+      <p class="warn-note">⚠ Peter Thiel-linked donors in base; Palantir works with Trump admin; donors oppose billionaire tax Mahan has criticized<sup class="cite">[17]</sup></p>`,
+    endorsements: `
+      <div class="end-item">Rep. Sam Liccardo (predecessor as SJ Mayor)<sup class="cite">[17]</sup></div>
+      <div class="end-item">Y Combinator CEO Garry Tan</div>
+      <div class="end-item">Silicon Valley tech community (financial backing)</div>`,
+    opposition: `
+      <div class="end-item opp">AFSCME Local 101 (city workers union)<sup class="cite">[8]</sup></div>
+      <div class="end-item opp">Assemblymembers Ash Kalra and Alex Lee ("millionaire tech puppet")<sup class="cite">[17]</sup></div>
+      <div class="end-item opp">San José Spotlight editorial called on him not to run<sup class="cite">[8]</sup></div>
+      <div class="end-item opp">CA Democratic Party chair asked single-digit candidates to drop out</div>`,
+    supporters: `<div class="voice-block sup"><div class="voice-label sup">Supporters say</div><ul>
+      <li>Actually delivered on homelessness in San Jose — real shelters and tiny homes, not just talk<sup class="cite">[8]</sup></li>
+      <li>The only centrist Democrat — can appeal to no-party-preference voters no other Dem is reaching<sup class="cite">[17]</sup></li>
+      <li>Pragmatic problem-solver California needs after years of ideological governance</li>
+    </ul></div>`,
+    detractors: `<div class="voice-block det"><div class="voice-label det">Detractors say</div><ul>
+      <li>A billionaire puppet — Palantir and Peter Thiel-linked money dominates his donor base<sup class="cite">[17]</sup></li>
+      <li>Abandoned the city council, then the mayor's office — a repeated stepping-stone pattern<sup class="cite">[8]</sup></li>
+      <li>Polling in single digits despite $12M raised and a Super Bowl ad<sup class="cite">[1]</sup></li>
+      <li>Dubious $35M escrow fundraising scheme drew campaign finance scrutiny<sup class="cite">[16]</sup></li>
+    </ul></div>`,
+  },
+
+  villaraigosa: {
+    background: `<ul class="bl">
+      <li>Born 1953, East LA; parents were Mexican immigrants; Cal State LA BA; Peoples College of Law<sup class="cite">[10]</sup></li>
+      <li>Catholic; faith central to his community organizing roots</li>
+      <li>Married three times; high-profile extramarital affair while serving as LA Mayor<sup class="cite">[10]</sup></li>
+      <li>First Latino CA Assembly Speaker; co-chaired Clinton's 2008 campaign; chaired 2012 DNC<sup class="cite">[10]</sup></li>
+    </ul>`,
+    platform: `<ul class="bl">
+      <li>Housing affordability (ballot title: "Housing Affordability Advocate")</li>
+      <li>Expand police / strengthen public safety<sup class="cite">[10]</sup></li>
+      <li>Charter school expansion; education reform</li>
+      <li>Moderate, deal-making governance; Latino community champion</li>
+    </ul>`,
+    record: `
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">As LA Mayor, increased LAPD and oversaw Measure R — billions in new transit infrastructure<sup class="cite">[10]</sup></span><span class="ti-link">✦ Backs public safety + infrastructure platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body"><span class="ti-text">Charter school advocacy alienated teachers unions — meaningful reform, but divisive with core Democratic base<sup class="cite">[10]</sup></span><span class="ti-link">✦ Mixed on education platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">Extramarital affair while Mayor; lost 2018 governor's race despite strong name ID going in<sup class="cite">[10]</sup></span><span class="ti-link">✦ Undermines trust and electability claims</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-r">✗</span><div class="ti-body"><span class="ti-text">Polling at ~2% despite years of name recognition — unable to build a viable base<sup class="cite">[1]</sup></span><span class="ti-link">✦ Contradicts "proven winner" messaging</span></div></div>`,
+    donors: `<p class="donor-total">$7.0M <sup class="cite">[2]</sup></p>
+      <p class="donor-note-sm">1,471 contributions; mid-tier fundraising</p>
+      <div class="chips"><span class="chip chip-warn">⚠ Chevron</span><span class="chip">CA State Assoc. of Electrical Workers</span><span class="chip">CA State Pipe Trades Council PAC</span></div>
+      <p class="warn-note">⚠ Chevron donation raises eyebrows for a Democrat running on affordability<sup class="cite">[2]</sup></p>`,
+    endorsements: `
+      <div class="end-item">LA Mayor Karen Bass<sup class="cite">[10]</sup></div>
+      <div class="end-item">Former Sen. Barbara Boxer</div>
+      <div class="end-item">Building trades unions</div>`,
+    opposition: `
+      <div class="end-item opp">California Teachers Association (charter school stance)</div>
+      <div class="end-item opp">CA Democratic Party chair publicly asked him to drop out<sup class="cite">[18]</sup></div>
+      <div class="end-item opp">Porter attacked him at debate for "cashing corporate checks for 40 years"<sup class="cite">[13]</sup></div>`,
+    supporters: `<div class="voice-block sup"><div class="voice-label sup">Supporters say</div><ul>
+      <li>Most experienced executive in the race — ran America's 2nd largest city for two full terms<sup class="cite">[10]</sup></li>
+      <li>His transit record in LA is a tangible, enduring legacy — billions in new rail<sup class="cite">[10]</sup></li>
+      <li>Deep roots in LA's Latino community give him authenticity no other candidate can match</li>
+    </ul></div>`,
+    detractors: `<div class="voice-block det"><div class="voice-label det">Detractors say</div><ul>
+      <li>Took Chevron money; had a public affair in office; lost 2018 with stronger name ID<sup class="cite">[10]</sup></li>
+      <li>Teachers unions will never support him — a key Democratic constituency written off</li>
+      <li>At 2% with the state party asking him to step aside<sup class="cite">[18]</sup></li>
+      <li>Continued presence risks handing the governorship to a Republican</li>
+    </ul></div>`,
+  },
+
+  thurmond: {
+    background: `<ul class="bl">
+      <li>Born 1964, Philadelphia; grew up on public assistance in a low-income family<sup class="cite">[11]</sup></li>
+      <li>Saint Mary's College BA; SF State MA in Social Work; career social worker before politics<sup class="cite">[11]</sup></li>
+      <li>Married; children; lives in Oakland</li>
+      <li>CA Assembly member (Bay Area) before becoming Supt. in 2019 — only current statewide officeholder in the field<sup class="cite">[11]</sup></li>
+    </ul>`,
+    platform: `<ul class="bl">
+      <li>Education equity — universal pre-K, equitable funding<sup class="cite">[11]</sup></li>
+      <li>Mental health services in every school</li>
+      <li>Poverty reduction and safety net expansion</li>
+      <li>Defend DEI programs; support billionaire tax<sup class="cite">[11]</sup></li>
+    </ul>`,
+    record: `
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">As Supt., expanded mental health access and equity programs in CA schools<sup class="cite">[11]</sup></span><span class="ti-link">✦ Backs education + mental health platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-g">✓</span><div class="ti-body"><span class="ti-text">Only candidate currently in a statewide elected seat — actions publicly on record in real time</span><span class="ti-link">✦ Backs transparency platform</span></div></div>
+      <div class="track-item"><span class="ti-icon ti-y">~</span><div class="ti-body"><span class="ti-text">CA schools have persistent outcome gaps despite his advocacy — critics question impact of his tenure<sup class="cite">[11]</sup></span><span class="ti-link">✦ Complicates education-as-credential platform</span></div></div>`,
+    donors: `<p class="donor-total">$1.6M <sup class="cite">[2]</sup></p>
+      <p class="donor-note-sm">1,769 contributions — lowest among Democrats</p>
+      <div class="chips"><span class="chip">Labor and education advocacy groups</span><span class="chip">Progressive organizations</span></div>
+      <p class="ok-note">✓ No major corporate donors; grassroots-heavy but underfunded<sup class="cite">[2]</sup></p>`,
+    endorsements: `
+      <div class="end-item">Progressive educators and equity advocates</div>
+      <div class="end-item">Some Assembly members (post-Swalwell)</div>`,
+    opposition: `
+      <div class="end-item opp">CA Democratic Party chair asked him to step aside<sup class="cite">[18]</sup></div>
+      <div class="end-item opp">Political analysts cite him as a spoiler risk to Democratic primary chances</div>`,
+    supporters: `<div class="voice-block sup"><div class="voice-label sup">Supporters say</div><ul>
+      <li>He's lived the California Dream from poverty — he knows what these programs mean<sup class="cite">[11]</sup></li>
+      <li>Education is the defining civil rights issue of our time and he's spent his career on it</li>
+      <li>As the only current officeholder, his record is being made in real time — full accountability</li>
+    </ul></div>`,
+    detractors: `<div class="voice-block det"><div class="voice-label det">Detractors say</div><ul>
+      <li>At 2% with no realistic path — continuing is a vanity project<sup class="cite">[1]</sup></li>
+      <li>CA schools have persistent outcome gaps despite years of his advocacy<sup class="cite">[11]</sup></li>
+      <li>Continued presence fragments the Democratic vote and risks a Republican governor<sup class="cite">[18]</sup></li>
+    </ul></div>`,
+  },
+
+};
+
+// ── ROW DEFINITIONS ──
+const ROWS = [
+  { label: "Background &amp; Personal", key: "background" },
+  { label: "Core Platform",             key: "platform"   },
+  { label: "Platform vs. Record",       key: "record"     },
+  { label: "Fundraising &amp; Major Donors", key: "donors" },
+  { label: "Key Endorsements",          key: "endorsements" },
+  { label: "Key Opposition",            key: "opposition"  },
+  { label: "Supporters Say",            key: "supporters"  },
+  { label: "Detractors Say",            key: "detractors"  },
+];
+
+const MAX_PCT = 20;
+
+// ── BUILD COLUMN HEADER HTML ──
+function buildHeader(c, rank) {
+  return `<th class="col-head ${c.party}" data-candidate="${c.id}">
+    <div class="avatar-wrap">
+      <div class="party-tag ${c.party}"><div class="party-dot ${c.party}"></div>${c.partyLabel}</div>
+      <img class="avatar" src="${c.img}" alt="${c.name}"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="avatar-fallback" style="display:none;">${c.initials}</div>
+      <span class="cname">${c.name}</span>
+      <span class="ctitle">${c.ctitle}</span>
+      <span class="poll-badge" id="badge-${c.id}">#${rank} · ~${c.pct}% <sup style="color:rgba(255,255,255,0.65);font-size:8px;">[1]</sup></span>
+      <span class="wing-badge ${c.wingClass}">${c.wing}</span>
+    </div>
+  </th>`;
+}
+
+// ── BUILD FULL TABLE ──
+function buildTable(sorted) {
+  const head = document.getElementById('tableHead');
+  const body = document.getElementById('tableBody');
+
+  // Headers
+  head.innerHTML = '<th class="row-label"></th>' +
+    sorted.map((c, i) => buildHeader(c, i + 1)).join('');
+
+  // Body rows
+  body.innerHTML = ROWS.map(row => {
+    const cells = sorted.map(c =>
+      `<td class="${c.party}-cell" data-candidate="${c.id}">${CONTENT[c.id][row.key] || ''}</td>`
+    ).join('');
+    return `<tr><td class="row-label">${row.label}</td>${cells}</tr>`;
+  }).join('');
+}
+
+// ── BUILD POLLING BARS ──
+function buildBars(sorted) {
+  const container = document.getElementById('pollBars');
+  container.innerHTML = '';
+  sorted.forEach(c => {
+    const barW = Math.max((c.pct / MAX_PCT) * 100, 1);
+    const row = document.createElement('div');
+    row.className = 'poll-row';
+    row.innerHTML = `
+      <div class="poll-name"><div class="poll-party-dot ${c.party}"></div>${c.name}</div>
+      <div class="poll-bar-track">
+        <div class="poll-bar-fill ${c.party}" style="width:0%">
+          <span class="poll-bar-label">${c.pct >= 8 ? c.partyLabel : ''}</span>
+        </div>
+      </div>
+      <div class="poll-pct">${c.pct}%</div>`;
+    container.appendChild(row);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      row.querySelector('.poll-bar-fill').style.width = barW + '%';
+    }));
+  });
+}
+
+// ── INITIAL RENDER ──
+const initial = getSorted();
+buildBars(initial);
+buildTable(initial);
+</script>
 
 </body>
 </html>
