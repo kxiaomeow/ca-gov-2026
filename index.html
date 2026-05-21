@@ -21,6 +21,39 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 .page-header .subtitle { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
 .meta-info { text-align: right; font-size: 11px; color: var(--text-muted); line-height: 1.8; }
 
+/* ── MOBILE ── */
+@media (max-width: 640px) {
+  body { padding: 20px 14px 60px; }
+
+  /* Header: stack vertically, left-align meta */
+  .page-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .page-header h1 { font-size: 22px; }
+  .meta-info { text-align: left; font-size: 11px; }
+
+  /* Updated bar: stack the two boxes */
+  .updated-bar { flex-direction: column !important; gap: 8px !important; padding: 12px 14px; }
+  .updated-bar > div { min-width: unset !important; width: 100%; }
+
+  /* Poll rows: tighter name column */
+  .poll-row { grid-template-columns: 120px 1fr 36px !important; gap: 7px !important; }
+  .poll-name { font-size: 12px !important; }
+  .poll-pct { font-size: 12px !important; }
+
+  /* Legends: smaller text, wrap tightly */
+  .top-legend, .track-legend { font-size: 11px; gap: 10px; }
+  .legend-row { font-size: 11px; gap: 10px; }
+
+  /* Debate tracker: smaller padding */
+  .debate-header { padding: 10px 12px; }
+  .debate-body { padding: 10px 12px; }
+
+  /* Widget cards: less padding */
+  .widget, .poll-widget { padding: 13px 14px !important; }
+
+  /* Sources grid: single column */
+  .source-grid { grid-template-columns: 1fr !important; }
+}
+
 .top-legend { max-width: 1700px; margin: 0 auto 10px; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-size: 12px; }
 .party-pip { display: flex; align-items: center; gap: 7px; }
 .party-swatch { width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0; }
